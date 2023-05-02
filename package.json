@@ -1,0 +1,24 @@
+{
+  "name": "project-3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jjsmith32199/Bandwagon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jjsmith32199/Bandwagon/issues"
+  },
+  "homepage": "https://github.com/jjsmith32199/Bandwagon#readme",
+  "dependencies": {
+    "mysql2": "^3.2.4"
+  }
+}
