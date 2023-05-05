@@ -7,7 +7,11 @@ const LandingPage = () => {
       <Box sx={{ mt: 5 }}>
         <Grid container spacing={3}>
           <Grid item xs={6}>
-            <img src="" alt="" style={{ width: "100%", height: "auto" }} />
+            <img
+              src="https://images.freeimages.com/images/large-previews/4f4/on-the-road-1633029.jpg"
+              alt="A description of the first "
+              style={{ width: "100%", height: "auto" }}
+            />
           </Grid>
           <Grid
             item
@@ -29,8 +33,24 @@ const LandingPage = () => {
             </Box>
           </Grid>
         </Grid>
+
         <Box sx={{ mt: 5 }}>
-          <img src="" alt="" style={{ width: "100%", height: "auto" }} />
+          <Grid container spacing={3}>
+            <Grid item xs={6}>
+              <Typography variant="h4">App Description</Typography>
+              <Typography variant="body1">
+                Our app is designed to provide an amazing user experience. It
+                offers a range of features, including...
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <img
+                src="https://images.freeimages.com/images/large-previews/4cd/it-s-a-wide-open-road-2-1-1448036.jpg"
+                alt="A description of the second "
+                style={{ width: "100%", height: "auto" }}
+              />
+            </Grid>
+          </Grid>
         </Box>
       </Box>
     </Container>
