@@ -102,25 +102,26 @@ const RoadTripPlanner = () => {
           cityBCoords.lng
         );
 
-        const response = await axios.get(
-          `https://api.seatgeek.com/2/events?geoip=${midPoint.lat},${midPoint.lng}&range=100mi&type=concert&client_id=NjkxODY3NXwxNjgzNDAyMzA3LjQzNjgwMjY`
-        );
+        if (isFinite(midPoint.lat) && isFinite(midPoint.lng)) {
+          const response = await axios.get(
+            `https://api.seatgeek.com/2/events?lat=${midPoint.lat}&lon=${midPoint.lng}&range=100mi&type=concert&client_id=NjkxODY3NXwxNjgzNDAyMzA3LjQzNjgwMjY`
+          );
 
-        if (response.data && response.data.events) {
-          const currentTime = new Date();
+          if (response.data && response.data.events) {
+            const currentTime = new Date();
 
-          const filteredEvents = response.data.events.filter((event) => {
-            const eventTime = new Date(event.datetime_local);
-            return eventTime > currentTime;
-          });
+            const filteredEvents = response.data.events.filter((event) => {
+              const eventTime = new Date(event.datetime_local);
+              return eventTime > currentTime;
+            });
 
-          setEvents(filteredEvents);
+            setEvents(filteredEvents);
+          }
         }
       } else {
         setEvents([]);
       }
     };
-
     fetchEvents();
   }, [selectedCities]);
 
@@ -128,13 +129,30 @@ const RoadTripPlanner = () => {
     setSearchValue(e.target.value);
   };
 
-  const handleCitySelect = (city) => {
-    if (!selectedCities.includes(city)) {
-      setSelectedCities([...selectedCities, city]);
+  const handleCitySelect = (cityName, formattedAddress) => {
+    if (!selectedCities.includes(cityName)) {
+      setSelectedCities([...selectedCities, cityName]);
       setSearchValue("");
-      setRecentSearches([...new Set([city, ...recentSearches])]);
-      updateMapCenter(city);
+      setRecentSearches([...new Set([cityName, ...recentSearches])]);
+      updateMapCenter(formattedAddress);
     }
+  };
+
+  const generateGoogleMapsUrl = () => {
+    if (selectedCities.length > 1) {
+      const origin = encodeURIComponent(selectedCities[0]);
+      const destination = encodeURIComponent(
+        selectedCities[selectedCities.length - 1]
+      );
+      const waypoints = selectedCities
+        .slice(1, -1)
+        .map((city) => `via:${encodeURIComponent(city)}`)
+        .join("|");
+
+      return `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&waypoints=${waypoints}&travelmode=driving`;
+    }
+
+    return null;
   };
 
   const handleCityDelete = (index) => {
@@ -181,8 +199,15 @@ const RoadTripPlanner = () => {
                       const city = place.address_components.find((component) =>
                         component.types.includes("locality")
                       );
-                      if (city) {
-                        handleCitySelect(city.long_name);
+                      const state = place.address_components.find((component) =>
+                        component.types.includes("administrative_area_level_1")
+                      );
+                      if (city && state) {
+                        const cityNameWithState = `${city.long_name}, ${state.short_name}`;
+                        handleCitySelect(
+                          cityNameWithState,
+                          place.formatted_address
+                        );
                       }
                     }
                   }
@@ -251,6 +276,15 @@ const RoadTripPlanner = () => {
                 </GoogleMap>
               </LoadScript>
             </Box>
+            <Button
+              variant="contained"
+              color="primary"
+              disabled={selectedCities.length < 2}
+              href={generateGoogleMapsUrl()}
+              target="_blank"
+            >
+              Open in Google Maps
+            </Button>
           </Grid>
         </Grid>
         <Grid container spacing={3}>
