@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import axios from "axios";
 import {
   Box,
   Container,
@@ -21,107 +22,135 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import {
   GoogleMap,
+  Autocomplete,
   LoadScript,
   DirectionsService,
   DirectionsRenderer,
 } from "@react-google-maps/api";
 
-const containerStyle = {
-  width: "100%",
-  height: "calc(100% - 16px)",
-};
+const libraries = ["places"];
 
-const center = {
-  lat: 39.8283,
-  lng: -98.5795,
-};
+const RoadTripPlanner = () => {
+  const findMidPoint = (lat1, lng1, lat2, lng2) => {
+    const dLon = (lng2 - lng1) * (Math.PI / 180);
 
-const CreateIntinerary = () => {
+    const lat1InRadians = lat1 * (Math.PI / 180);
+    const lat2InRadians = lat2 * (Math.PI / 180);
+    const lng1InRadians = lng1 * (Math.PI / 180);
+
+    const Bx = Math.cos(lat2InRadians) * Math.cos(dLon);
+    const By = Math.cos(lat2InRadians) * Math.sin(dLon);
+    const midLat = Math.atan2(
+      Math.sin(lat1InRadians) + Math.sin(lat2InRadians),
+      Math.sqrt(
+        (Math.cos(lat1InRadians) + Bx) * (Math.cos(lat1InRadians) + Bx) +
+          By * By
+      )
+    );
+    const midLng = lng1InRadians + Math.atan2(By, Math.cos(lat1InRadians) + Bx);
+
+    return { lat: midLat * (180 / Math.PI), lng: midLng * (180 / Math.PI) };
+  };
+
   const [searchValue, setSearchValue] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
   const [selectedCities, setSelectedCities] = useState([]);
   const [recentSearches, setRecentSearches] = useState([]);
+  const [geocoder, setGeocoder] = useState(null);
+  const [events, setEvents] = useState([]);
 
-  // Dummy data for search results
-  const cities = [
-    "New York",
-    "Los Angeles",
-    "Chicago",
-    "Houston",
-    "Phoenix",
-    "Philadelphia",
-    "San Antonio",
-    "San Diego",
-    "Dallas",
-    "San Jose",
-  ];
+  const containerStyle = {
+    width: "100%",
+    height: "calc(100% - 16px)",
+  };
 
-  const events = [
-    {
-      id: 1,
-      title: "Event 1",
-      imageUrl: "https://via.placeholder.com/150",
-      link: "https://www.example.com/event1",
-      date: "2023-05-10",
-      time: "19:00",
-    },
-    {
-      id: 2,
-      title: "Event 2",
-      imageUrl: "https://via.placeholder.com/150",
-      link: "https://www.example.com/event2",
-      date: "2023-05-11",
-      time: "20:00",
-    },
-    {
-      id: 3,
-      title: "Event 3",
-      imageUrl: "https://via.placeholder.com/150",
-      link: "https://www.example.com/event3",
-      date: "2023-05-12",
-      time: "21:00",
-    },
-    {
-      id: 4,
-      title: "Event 4",
-      imageUrl: "https://via.placeholder.com/150",
-      link: "https://www.example.com/event4",
-      date: "2023-05-13",
-      time: "22:00",
-    },
-  ];
+  const autoCompleteRef = useRef(null);
+
+  const [center, setCenter] = useState({
+    lat: 39.8283,
+    lng: -98.5795,
+  });
+  const getCityCoordinates = async (city) => {
+    const geocoder = new window.google.maps.Geocoder();
+    return new Promise((resolve, reject) => {
+      geocoder.geocode({ address: city }, (results, status) => {
+        if (status === "OK") {
+          resolve({
+            lat: results[0].geometry.location.lat(),
+            lng: results[0].geometry.location.lng(),
+          });
+        } else {
+          reject(new Error(`Geocode failed for ${city} with status ${status}`));
+        }
+      });
+    });
+  };
+
+  // Fetch events
+  useEffect(() => {
+    const fetchEvents = async () => {
+      if (selectedCities.length > 1) {
+        const cityA = selectedCities[0];
+        const cityB = selectedCities[selectedCities.length - 1];
+
+        const cityACoords = await getCityCoordinates(cityA);
+        const cityBCoords = await getCityCoordinates(cityB);
+
+        const midPoint = findMidPoint(
+          cityACoords.lat,
+          cityACoords.lng,
+          cityBCoords.lat,
+          cityBCoords.lng
+        );
+
+        const response = await axios.get(
+          `https://api.seatgeek.com/2/events?geoip=${midPoint.lat},${midPoint.lng}&range=100mi&type=concert&client_id=NjkxODY3NXwxNjgzNDAyMzA3LjQzNjgwMjY`
+        );
+
+        if (response.data && response.data.events) {
+          const currentTime = new Date();
+
+          const filteredEvents = response.data.events.filter((event) => {
+            const eventTime = new Date(event.datetime_local);
+            return eventTime > currentTime;
+          });
+
+          setEvents(filteredEvents);
+        }
+      } else {
+        setEvents([]);
+      }
+    };
+
+    fetchEvents();
+  }, [selectedCities]);
+
   const handleSearch = (e) => {
     setSearchValue(e.target.value);
-
-    if (e.target.value.trim() !== "") {
-      setSearchResults(
-        cities.filter((city) =>
-          city.toLowerCase().includes(e.target.value.toLowerCase())
-        )
-      );
-    } else {
-      setSearchResults([]);
-    }
   };
 
   const handleCitySelect = (city) => {
-    setSelectedCities([...selectedCities, city]);
-    setSearchResults([]);
-    setSearchValue("");
-
-    // Add the selected city to the recent searches list, and remove duplicates
-    setRecentSearches([...new Set([city, ...recentSearches])]);
-  };
-
-  const handleRecentSearchClick = (city) => {
-    setSearchValue(city);
-    setSearchResults(
-      cities.filter((c) => c.toLowerCase().includes(city.toLowerCase()))
-    );
+    if (!selectedCities.includes(city)) {
+      setSelectedCities([...selectedCities, city]);
+      setSearchValue("");
+      setRecentSearches([...new Set([city, ...recentSearches])]);
+      updateMapCenter(city);
+    }
   };
 
   const handleCityDelete = (index) => {
     setSelectedCities(selectedCities.filter((_, i) => i !== index));
+  };
+
+  const updateMapCenter = (city) => {
+    geocoder.geocode({ address: city }, (results, status) => {
+      if (status === "OK") {
+        const newCenter = {
+          lat: results[0].geometry.location.lat(),
+          lng: results[0].geometry.location.lng(),
+        };
+        setCenter(newCenter);
+      }
+    });
   };
 
   const [response, setResponse] = useState(null);
@@ -137,44 +166,37 @@ const CreateIntinerary = () => {
       <Box sx={{ mt: 5 }}>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
-            <TextField
-              label="Search for a city"
-              variant="outlined"
-              fullWidth
-              value={searchValue}
-              onChange={handleSearch}
-            />
-            {searchResults.length > 0 && (
-              <Paper elevation={3}>
-                <List>
-                  {searchResults.map((city) => (
-                    <ListItem
-                      button
-                      key={city}
-                      onClick={() => handleCitySelect(city)}
-                    >
-                      <ListItemText primary={city} />
-                    </ListItem>
-                  ))}
-                </List>
-              </Paper>
-            )}
-            {recentSearches.length > 0 && (
-              <Box sx={{ mt: 2 }}>
-                <Typography variant="h6">Recent Searches</Typography>
-                <List>
-                  {recentSearches.map((city) => (
-                    <ListItem
-                      button
-                      key={city}
-                      onClick={() => handleRecentSearchClick(city)}
-                    >
-                      <ListItemText primary={city} />
-                    </ListItem>
-                  ))}
-                </List>
-              </Box>
-            )}
+            <LoadScript
+              googleMapsApiKey="AIzaSyAJ31PZxKIoFfs1lgoDYFJxt57-MktBcow"
+              libraries={libraries}
+            >
+              <Autocomplete
+                onLoad={(autocomplete) => {
+                  autoCompleteRef.current = autocomplete;
+                }}
+                onPlaceChanged={() => {
+                  if (autoCompleteRef.current !== null) {
+                    const place = autoCompleteRef.current.getPlace();
+                    if (place.address_components) {
+                      const city = place.address_components.find((component) =>
+                        component.types.includes("locality")
+                      );
+                      if (city) {
+                        handleCitySelect(city.long_name);
+                      }
+                    }
+                  }
+                }}
+              >
+                <TextField
+                  label="Search for a city"
+                  variant="outlined"
+                  fullWidth
+                  value={searchValue}
+                  onChange={handleSearch}
+                />
+              </Autocomplete>
+            </LoadScript>
           </Grid>
           <Grid item xs={12} sm={6}>
             <Typography variant="h6">Selected Cities</Typography>
@@ -200,11 +222,17 @@ const CreateIntinerary = () => {
           <Grid item xs={12}>
             <Typography variant="h6">Route Map</Typography>
             <Box sx={{ height: "calc(2 * (200px + 16px))", mt: 2, mb: 2 }}>
-              <LoadScript googleMapsApiKey="YOUR_API_KEY">
+              <LoadScript
+                googleMapsApiKey="AIzaSyAJ31PZxKIoFfs1lgoDYFJxt57-MktBcow"
+                libraries={libraries}
+              >
                 <GoogleMap
                   mapContainerStyle={containerStyle}
                   center={center}
                   zoom={4}
+                  onLoad={(map) => {
+                    setGeocoder(new window.google.maps.Geocoder());
+                  }}
                 >
                   {selectedCities.length > 1 && (
                     <DirectionsService
@@ -219,7 +247,6 @@ const CreateIntinerary = () => {
                       callback={directionsCallback}
                     />
                   )}
-
                   {response && <DirectionsRenderer directions={response} />}
                 </GoogleMap>
               </LoadScript>
@@ -235,11 +262,11 @@ const CreateIntinerary = () => {
           {events.slice(0, 4).map((event) => (
             <Grid item xs={12} sm={6} md={3} key={event.id}>
               <Card>
-                <CardActionArea href={event.link} target="_blank">
+                <CardActionArea href={event.url} target="_blank">
                   <CardMedia
                     component="img"
                     height="140"
-                    image={event.imageUrl}
+                    image={event.performers[0].image}
                     alt={event.title}
                   />
                   <CardContent>
@@ -247,7 +274,7 @@ const CreateIntinerary = () => {
                       {event.title}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      {event.date} - {event.time}
+                      {new Date(event.datetime_local).toLocaleString()}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
@@ -255,7 +282,7 @@ const CreateIntinerary = () => {
                   <Button
                     size="small"
                     color="primary"
-                    href={event.link}
+                    href={event.url}
                     target="_blank"
                   >
                     Buy Tickets
@@ -270,4 +297,4 @@ const CreateIntinerary = () => {
   );
 };
 
-export default CreateIntinerary;
+export default RoadTripPlanner;
