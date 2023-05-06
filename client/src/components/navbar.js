@@ -8,7 +8,7 @@ import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
-// import profileImageURL from ""; replace src with {{profileImageURL}}
+// import profileImageURL from ""; replace src on line 51 with {{profileImageURL}}
 
 export default function ButtonAppBar() {
   const [loggedIn, setLoggedIn] = React.useState(false);
