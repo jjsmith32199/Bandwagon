@@ -1,4 +1,6 @@
-const router = require('express').Router();
+const express = require('express');
+require('dotenv').config()
+const router = express.Router();
 const fetch = require('node-fetch');
 const apiKey = process.env.SEATGEEK_API_KEY;
 const { Artist, Genre, Venue } = require('../../models');
@@ -47,4 +49,5 @@ router.get('/:id', async (req, res) => {
     }
 });
   
-  
+
+module.exports = router;

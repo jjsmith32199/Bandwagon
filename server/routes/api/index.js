@@ -1,9 +1,12 @@
 const router = require('express').Router();
-const artistRoute = require('./artist-route');
-const genreRoute = require('./genre-route');
-const venueRoute = require('./venue-route');
+const artistRoutes = require('./artist-route.js');
+const genreRoutes = require('./genre-route.js');
+const venueRoutes = require('./venue-route.js');
 
+router.use('/api/artists', artistRoutes);
+router.use('/api/genres', genreRoutes);
+router.use('/api/venues', venueRoutes);
 
-router.use('/artist', artistRoute);
-router.use('/genre', genreRoute);
-router.use('/venue', venueRoute);
+// Other app configuration and middleware
+
+module.exports = router;

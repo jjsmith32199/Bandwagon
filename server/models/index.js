@@ -1,13 +1,12 @@
-const Artist = require('./artist');
-const Genre = require('./Genre');
-const Venue = require('./venue');
+const mongoose = require('mongoose');
 
+const artistSchema = new mongoose.Schema({
+  name: String,
+ 
+  genres: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Genre' }],
+  venues: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Venue' }]
+});
 
-const ArtistVenue = require('./artistVenue');
-const ArtistGenre = require('./artistGenre');
+const Artist = mongoose.model('Artist', artistSchema);
 
-
-
-Artist.belongsToMany(Genre, { through: ArtistGenre });
-Genre.belongsToMany(Artist, { through: ArtistGenre });
-Venue.belongsToMany(Artist, { through: ArtistVenue });
+module.exports = Artist;

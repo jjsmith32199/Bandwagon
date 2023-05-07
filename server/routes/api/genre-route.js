@@ -1,4 +1,5 @@
-const router = require('express').Router();
+const express = require('express');
+const router = express.Router();
 const { Genre } = require('../../models');
 
 // The `/api/genres` endpoint
@@ -10,7 +11,7 @@ router.get('/', async (req, res) => {
         res.status(500).json(err);
     }
 });
-router.get(':id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const genreData = await Genre.findByPk(req.params.id);
         if (!genreData) {
@@ -22,3 +23,5 @@ router.get(':id', async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+module.exports = router;
