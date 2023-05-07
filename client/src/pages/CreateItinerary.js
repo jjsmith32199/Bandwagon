@@ -185,7 +185,7 @@ const RoadTripPlanner = () => {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <LoadScript
-              googleMapsApiKey="AIzaSyAJ31PZxKIoFfs1lgoDYFJxt57-MktBcow"
+              googleMapsApiKey="ENTER_API_KEY_HERE"
               libraries={libraries}
             >
               <Autocomplete
@@ -248,7 +248,7 @@ const RoadTripPlanner = () => {
             <Typography variant="h6">Route Map</Typography>
             <Box sx={{ height: "calc(2 * (200px + 16px))", mt: 2, mb: 2 }}>
               <LoadScript
-                googleMapsApiKey="AIzaSyAJ31PZxKIoFfs1lgoDYFJxt57-MktBcow"
+                googleMapsApiKey="ENTER_API_KEY_HERE"
                 libraries={libraries}
               >
                 <GoogleMap
