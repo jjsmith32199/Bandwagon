@@ -5,6 +5,7 @@ import { CssBaseline, Box } from "@mui/material";
 import Footer from "./components/Footer";
 import Navbar from "./components/navbar";
 import CreateItinerary from "./pages/CreateItinerary";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const App = () => (
   <>
@@ -18,4 +19,9 @@ const App = () => (
 );
 
 const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+ReactDOM.render(
+  <Router>
+    <App />
+  </Router>,
+  rootElement
+);

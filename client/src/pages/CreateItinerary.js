@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+
 import {
   Box,
   Container,
@@ -30,7 +32,7 @@ import {
 
 const libraries = ["places"];
 
-const RoadTripPlanner = () => {
+const RoadTripPlanner = ({ SavedItineraries, setSavedItineraries }) => {
   const findMidPoint = (lat1, lng1, lat2, lng2) => {
     const dLon = (lng2 - lng1) * (Math.PI / 180);
 
@@ -57,6 +59,21 @@ const RoadTripPlanner = () => {
   const [recentSearches, setRecentSearches] = useState([]);
   const [geocoder, setGeocoder] = useState(null);
   const [events, setEvents] = useState([]);
+
+  const saveItinerary = () => {
+    if (Array.isArray(SavedItineraries)) {
+      setSavedItineraries([
+        ...SavedItineraries,
+        {
+          cities: selectedCities,
+          googleMapsUrl: generateGoogleMapsUrl(),
+          events: events.slice(0, 4),
+        },
+      ]);
+    } else {
+      console.error("savedItineraries is not an array:", SavedItineraries);
+    }
+  };
 
   const containerStyle = {
     width: "100%",
@@ -185,7 +202,7 @@ const RoadTripPlanner = () => {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <LoadScript
-              googleMapsApiKey="ENTER_API_KEY_HERE"
+              googleMapsApiKey="AIzaSyAJ31PZxKIoFfs1lgoDYFJxt57-MktBcow"
               libraries={libraries}
             >
               <Autocomplete
@@ -248,7 +265,7 @@ const RoadTripPlanner = () => {
             <Typography variant="h6">Route Map</Typography>
             <Box sx={{ height: "calc(2 * (200px + 16px))", mt: 2, mb: 2 }}>
               <LoadScript
-                googleMapsApiKey="ENTER_API_KEY_HERE"
+                googleMapsApiKey="AIzaSyAJ31PZxKIoFfs1lgoDYFJxt57-MktBcow"
                 libraries={libraries}
               >
                 <GoogleMap
@@ -283,8 +300,21 @@ const RoadTripPlanner = () => {
               href={generateGoogleMapsUrl()}
               target="_blank"
             >
-              Open in Google Maps
+              Open Google Maps
             </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              disabled={selectedCities.length < 2}
+              onClick={saveItinerary}
+            >
+              Save Itinerary
+            </Button>
+            <Link to="/SavedItinerary">
+              <Button variant="outlined" color="secondary">
+                View Saved Itineraries
+              </Button>
+            </Link>
           </Grid>
         </Grid>
         <Grid container spacing={3}>
