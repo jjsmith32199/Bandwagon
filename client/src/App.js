@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./App.css";
+import RoadTripPlanner from "./pages/CreateItinerary";
+import SavedItinerary from "./pages/SavedItinerary";
 
 function App() {
+  const [savedItineraries, setSavedItineraries] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <RoadTripPlanner
+                savedItineraries={savedItineraries}
+                setSavedItineraries={setSavedItineraries}
+              />
+            }
+          />
+          <Route
+            path="/SavedItinerary"
+            element={
+              <SavedItinerary
+                savedItineraries={savedItineraries}
+                setSavedItineraries={setSavedItineraries}
+              />
+            }
+          />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 

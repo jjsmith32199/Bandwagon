@@ -30,7 +30,6 @@
     "graphql": "^15.8.0",
     "if-env": "^1.0.4",
     "jsonwebtoken": "^9.0.0",
-    "path": "^0.12.7",
-    "sequelize": "^6.31.1"
+    "react-router-dom": "^6.11.1"
   }
 }

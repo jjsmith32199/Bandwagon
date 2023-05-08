@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link as RouterLink } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -63,11 +64,11 @@ export default function ButtonAppBar() {
             </Box>
           ) : (
             <>
-              <Button color="inherit" to="/login">
+              <Button color="inherit" component={RouterLink} to="/login">
                 Login
               </Button>
               <p>|</p>
-              <Button color="inherit" to="/register">
+              <Button color="inherit" component={RouterLink} to="/register">
                 Register
               </Button>
             </>
