@@ -84,15 +84,21 @@ const SignupForm = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <Button
-                fullWidth
-                type="submit"
-                variant="contained"
-                color="primary"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Sign Up
-              </Button>
+            <Button
+              fullWidth
+              type="submit"
+              variant="contained"
+              color="primary"
+              sx={{
+                mt: 3,
+                mb: 2,
+                backgroundColor: "#9893DA",
+                  "&:hover": {
+                   backgroundColor: "#72727E",
+               },
+            }}
+              >Register
+             </Button>
             </Grid>
           </Grid>
         </Box>

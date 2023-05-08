@@ -67,9 +67,12 @@ const LoginForm = () => {
                 type="submit"
                 variant="contained"
                 color="primary"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 3, mb: 2,  backgroundColor: "#9893DA",
+                "&:hover": {
+                 backgroundColor: "#72727E", }}
+                }
               >
-                Sign In
+                Log In
               </Button>
             </Grid>
           </Grid>
