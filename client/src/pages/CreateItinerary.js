@@ -62,7 +62,8 @@ const CreateItinerary = () => {
   const [savedItineraries, setSavedItineraries] = useState([]);
 
   const saveItinerary = () => {
-    console.log("saveItinerary called")
+    console.log("saveItinerary called");
+
     if (typeof setSavedItineraries === "function") {
       setSavedItineraries([
         ...savedItineraries,
