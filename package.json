@@ -26,6 +26,7 @@
     "gql": "^1.1.2",
     "graphql": "^15.8.0",
     "if-env": "^1.0.4",
-    "jsonwebtoken": "^9.0.0"
+    "jsonwebtoken": "^9.0.0",
+    "react-router-dom": "^6.11.1"
   }
 }
