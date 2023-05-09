@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import RoadTripPlanner from "./pages/CreateItinerary";
-import SavedItinerary from "./pages/SavedItinerary";
+import CreateItinerary from "./CreateItinerary";
+import SavedItinerary from "./SavedItinerary";
 
 function App() {
   const [savedItineraries, setSavedItineraries] = useState([]);
@@ -14,20 +14,16 @@ function App() {
           <Route
             path="/"
             element={
-              <RoadTripPlanner
+              <CreateItinerary
                 savedItineraries={savedItineraries}
                 setSavedItineraries={setSavedItineraries}
               />
             }
           />
+
           <Route
-            path="/SavedItinerary"
-            element={
-              <SavedItinerary
-                savedItineraries={savedItineraries}
-                setSavedItineraries={setSavedItineraries}
-              />
-            }
+            path="/savedItinerary"
+            element={<SavedItinerary savedItineraries={savedItineraries} />}
           />
         </Routes>
       </div>
