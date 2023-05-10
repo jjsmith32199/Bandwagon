@@ -1,8 +1,11 @@
 const User = require('../models/User');
+const { ObjectID } = require('mongodb');
+const { getDb } = require('../connection');
 
 const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find();
+    const db = getDb();
+    const users = await db.collection('users').find().toArray();
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ error: 'Server error' });
@@ -11,9 +14,12 @@ const getAllUsers = async (req, res) => {
 
 const createUser = async (req, res) => {
   try {
-    const { name, email } = req.body;
-    const newUser = new User({ name, email });
+    const { name, email, password } = req.body;
+
+    const newUser = new User({ name, email, password });
+
     const savedUser = await newUser.save();
+
     res.status(201).json(savedUser);
   } catch (error) {
     res.status(500).json({ error: 'Server error' });
@@ -21,31 +27,35 @@ const createUser = async (req, res) => {
 };
 
 
+
 const getUserById = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+    const db = getDb();
+    const user = await db.collection('users').findOne({ _id: ObjectID(req.params.id) });
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(404).json({ error: 'User not found' });
     }
-    res.status(200).json(user);
   } catch (error) {
     res.status(500).json({ error: 'Server error' });
   }
 };
 
-
 const updateUserById = async (req, res) => {
   try {
-    const { name, email } = req.body;
-    const updatedUser = await User.findByIdAndUpdate(
-      req.params.id,
-      { name, email },
-      { new: true }
+    const db = getDb();
+    const { username, email } = req.body;
+    const updatedUser = await db.collection('users').findOneAndUpdate(
+      { _id: ObjectID(req.params.id) },
+      { $set: { username, email } },
+      { returnOriginal: false }
     );
-    if (!updatedUser) {
-      return res.status(404).json({ error: 'User not found' });
+    if (updatedUser.value) {
+      res.status(200).json(updatedUser.value);
+    } else {
+      res.status(404).json({ error: 'User not found' });
     }
-    res.status(200).json(updatedUser);
   } catch (error) {
     res.status(500).json({ error: 'Server error' });
   }
@@ -54,11 +64,13 @@ const updateUserById = async (req, res) => {
 
 const deleteUserById = async (req, res) => {
   try {
-    const deletedUser = await User.findByIdAndDelete(req.params.id);
-    if (!deletedUser) {
-      return res.status(404).json({ error: 'User not found' });
+    const db = getDb();
+    const result = await db.collection('users').deleteOne({ _id: ObjectID(req.params.id) });
+    if (result.deletedCount > 0) {
+      res.status(200).json({ message: 'User deleted successfully' });
+    } else {
+      res.status(404).json({ error: 'User not found' });
     }
-    res.status(200).json({ message: 'User deleted successfully' });
   } catch (error) {
     res.status(500).json({ error: 'Server error' });
   }
