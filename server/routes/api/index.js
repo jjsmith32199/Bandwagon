@@ -7,7 +7,7 @@ const UserRoutes = require('./user-routes.js');
 router.use('/api/artists', artistRoutes);
 router.use('/api/genres', genreRoutes);
 router.use('/api/venues', venueRoutes);
-router.use('api/users', UserRoutes)
+router.use('/api/users', UserRoutes)
 
 // Other app configuration and middleware
 
