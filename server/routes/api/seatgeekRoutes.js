@@ -9,7 +9,7 @@ app.use('/api/seatgeek', seatgeekRoutes);
 // ... other middleware and routes
 
 app.listen(27017, () => {
-  console.log('Server listening on port 3000');
+  console.log('Server listening on port 27017');
 });
 
 module.exports = router;
