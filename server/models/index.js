@@ -6,5 +6,6 @@ const User = require('./User');
 module.exports = {
   Artist,
   Venue,
-  User
+  User,
+  Genre
 };
