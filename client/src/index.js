@@ -1,27 +1,40 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { CssBaseline, Box } from "@mui/material";
-// import LandingPage from "./components/HomePage";
+import { CssBaseline } from "@mui/material";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Footer from "./components/Footer";
 import Navbar from "./components/navbar";
+import LandingPage from "./components/HomePage";
+import LoginForm from "./components/loginForm";
+import SignUpForm from "./components/signUpForm";
 import CreateItinerary from "./pages/CreateItinerary";
-import { BrowserRouter as Router } from "react-router-dom";
+import SavedItinerary from "./pages/savedItinerary";
+
+const handleSignUp = () => {};
+const handleLogin = () => {};
 
 const App = () => (
   <>
     <CssBaseline />
-    <Box minHeight="calc(100vh - 150px)">
+    <Router>
       <Navbar />
-      <CreateItinerary />
-    </Box>
-    <Footer />
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route
+          path="/loginForm"
+          element={<LoginForm handleLogin={handleLogin} />}
+        />
+        <Route
+          path="/signUpForm"
+          element={<SignUpForm handleSignUp={handleSignUp} />}
+        />
+        <Route path="/createItinerary" element={<CreateItinerary />} />
+        <Route path="/savedItinerary" element={<SavedItinerary />} />
+      </Routes>
+      <Footer />
+    </Router>
   </>
 );
 
 const rootElement = document.getElementById("root");
-ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
-  rootElement
-);
+ReactDOM.render(<App />, rootElement);

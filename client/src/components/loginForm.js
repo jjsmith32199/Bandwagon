@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 
-const LoginForm = () => {
+const LoginForm = ({ handleLogin }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -16,6 +16,8 @@ const LoginForm = () => {
       email: formData.get("email"),
       password: formData.get("password"),
     });
+
+    handleLogin();
   };
 
   return (
@@ -67,10 +69,14 @@ const LoginForm = () => {
                 type="submit"
                 variant="contained"
                 color="primary"
-                sx={{ mt: 3, mb: 2,  backgroundColor: "#9893DA",
-                "&:hover": {
-                 backgroundColor: "#72727E", }}
-                }
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  backgroundColor: "#9893DA",
+                  "&:hover": {
+                    backgroundColor: "#72727E",
+                  },
+                }}
               >
                 Log In
               </Button>
