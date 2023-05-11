@@ -32,7 +32,7 @@ import {
 
 const libraries = ["places"];
 
-const RoadTripPlanner = ({ SavedItineraries, setSavedItineraries }) => {
+const CreateItinerary = () => {
   const findMidPoint = (lat1, lng1, lat2, lng2) => {
     const dLon = (lng2 - lng1) * (Math.PI / 180);
 
@@ -59,11 +59,14 @@ const RoadTripPlanner = ({ SavedItineraries, setSavedItineraries }) => {
   const [recentSearches, setRecentSearches] = useState([]);
   const [geocoder, setGeocoder] = useState(null);
   const [events, setEvents] = useState([]);
+  const [savedItineraries, setSavedItineraries] = useState([]);
 
   const saveItinerary = () => {
-    if (Array.isArray(SavedItineraries)) {
+    console.log("saveItinerary called");
+
+    if (typeof setSavedItineraries === "function") {
       setSavedItineraries([
-        ...SavedItineraries,
+        ...savedItineraries,
         {
           cities: selectedCities,
           googleMapsUrl: generateGoogleMapsUrl(),
@@ -71,7 +74,10 @@ const RoadTripPlanner = ({ SavedItineraries, setSavedItineraries }) => {
         },
       ]);
     } else {
-      console.error("savedItineraries is not an array:", SavedItineraries);
+      console.error(
+        "setSavedItineraries is not a function:",
+        setSavedItineraries
+      );
     }
   };
 
@@ -202,7 +208,7 @@ const RoadTripPlanner = ({ SavedItineraries, setSavedItineraries }) => {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <LoadScript
-              googleMapsApiKey="AIzaSyAJ31PZxKIoFfs1lgoDYFJxt57-MktBcow"
+              googleMapsApiKey="AIzaSyDb4jTjuzUWIXLmRhJF8ZWb2Z9UumbKT2s"
               libraries={libraries}
             >
               <Autocomplete
@@ -265,7 +271,7 @@ const RoadTripPlanner = ({ SavedItineraries, setSavedItineraries }) => {
             <Typography variant="h6">Route Map</Typography>
             <Box sx={{ height: "calc(2 * (200px + 16px))", mt: 2, mb: 2 }}>
               <LoadScript
-                googleMapsApiKey="AIzaSyAJ31PZxKIoFfs1lgoDYFJxt57-MktBcow"
+                googleMapsApiKey="AIzaSyDb4jTjuzUWIXLmRhJF8ZWb2Z9UumbKT2s"
                 libraries={libraries}
               >
                 <GoogleMap
@@ -310,11 +316,11 @@ const RoadTripPlanner = ({ SavedItineraries, setSavedItineraries }) => {
             >
               Save Itinerary
             </Button>
-            <Link to="/SavedItinerary">
-              <Button variant="outlined" color="secondary">
-                View Saved Itineraries
-              </Button>
-            </Link>
+            <Link to="/savedItinerary">
+            <Button variant="outlined" color="secondary">
+              View Saved Itineraries
+            </Button>
+          </Link>
           </Grid>
         </Grid>
         <Grid container spacing={3}>
@@ -361,4 +367,4 @@ const RoadTripPlanner = ({ SavedItineraries, setSavedItineraries }) => {
   );
 };
 
-export default RoadTripPlanner;
+export default CreateItinerary;

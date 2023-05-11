@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 
-const SignupForm = () => {
+const SignupForm = ({ handleSignUp }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -18,6 +18,8 @@ const SignupForm = () => {
       email: formData.get("email"),
       password: formData.get("password"),
     });
+
+    handleSignUp();
   };
 
   return (
@@ -84,21 +86,22 @@ const SignupForm = () => {
               />
             </Grid>
             <Grid item xs={12}>
-            <Button
-              fullWidth
-              type="submit"
-              variant="contained"
-              color="primary"
-              sx={{
-                mt: 3,
-                mb: 2,
-                backgroundColor: "#9893DA",
+              <Button
+                fullWidth
+                type="submit"
+                variant="contained"
+                color="primary"
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  backgroundColor: "#9893DA",
                   "&:hover": {
-                   backgroundColor: "#72727E",
-               },
-            }}
-              >Register
-             </Button>
+                    backgroundColor: "#72727E",
+                  },
+                }}
+              >
+                Sign Up
+              </Button>
             </Grid>
           </Grid>
         </Box>
