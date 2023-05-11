@@ -2,6 +2,8 @@ import React from "react";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import LaunchButton from "./Launch";
 import HeaderImage from "../../src/assets/img/headerpic.jpg";
+import DescriptionImage from "../assets/img/description-pic.jpg";
+import ScrollAnimation from './ScrollAnimation';
 
 const LandingPage = () => {
   return (
@@ -9,7 +11,7 @@ const LandingPage = () => {
       <Box sx={{ mt: 5, position: "relative" }}>
         <img
           src={HeaderImage}
-          alt=""
+          alt="group of people at a concert"
           style={{ width: "100%", height: "auto", zIndex: "-1" }}
         />
         <Box
@@ -39,24 +41,25 @@ const LandingPage = () => {
           </Box>
         </Box>
       </Box>
+      <ScrollAnimation>
       <Box sx={{ mt: 5 }}>
         <Grid container spacing={3}>
           <Grid item xs={6}>
-            <Typography variant="h4">App Description</Typography>
+            <Typography variant="h4">Jam. Drive. Repeat. </Typography>
             <Typography variant="body1">
-              Our app is designed to provide an amazing user experience. It
-              offers a range of features, including...
+             
             </Typography>
           </Grid>
           <Grid item xs={6}>
             <img
-              src="https://images.freeimages.com/images/large-previews/4cd/it-s-a-wide-open-road-2-1-1448036.jpg"
-              alt="A description of the second "
+              src={DescriptionImage}
+              alt="a woman hanging out the window of a car"
               style={{ width: "100%", height: "auto" }}
             />
           </Grid>
         </Grid>
       </Box>
+      </ScrollAnimation>
     </Container>
   );
 };
