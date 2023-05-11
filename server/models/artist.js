@@ -1,9 +1,8 @@
 require('dotenv').config();
+require('dotenv').config();
 const mongoose = require('mongoose');
 const axios = require('axios');
 const apiKey = process.env.SEATGEEK_API_KEY;
-const url = `https://api.seatgeek.com/2/events?client_id=${apiKey}`;
-// const response = await axios.get(url);
 
 const artistSchema = new mongoose.Schema({
   artist_name: {
@@ -36,7 +35,8 @@ const Artist = mongoose.model('Artist', artistSchema);
 
 async function populateDatabase() {
   try {
-    const response = await axios.get('https://api.seatgeek.com/2/events');
+    const url = `https://api.seatgeek.com/2/events?client_id=${apiKey}`;
+    const response = await axios.get(url);
     const events = response.data.events;
     
     // Iterate over each event and create an Artist document for each performer
