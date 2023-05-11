@@ -2,7 +2,7 @@ require('dotenv').config();
 require('dotenv').config();
 const mongoose = require('mongoose');
 const axios = require('axios');
-const apiKey = process.env.SEATGEEK_API_KEY;
+const clientID = process.env.SEATGEEK_CLIENT_ID;
 
 const artistSchema = new mongoose.Schema({
   artist_name: {
@@ -35,7 +35,7 @@ const Artist = mongoose.model('Artist', artistSchema);
 
 async function populateDatabase() {
   try {
-    const url = `https://api.seatgeek.com/2/events?client_id=${apiKey}`;
+    const url = `https://api.seatgeek.com/2/events?client_id=${clientID}`;
     const response = await axios.get(url);
     const events = response.data.events;
     
