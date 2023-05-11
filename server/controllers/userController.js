@@ -1,6 +1,6 @@
 const User = require('../models/User');
 const { ObjectID } = require('mongodb');
-const { getDb } = require('../connection');
+const { getDb } = require('../../server/config/connection');
 
 const getAllUsers = async (req, res) => {
   try {
@@ -15,11 +15,8 @@ const getAllUsers = async (req, res) => {
 const createUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
-
     const newUser = new User({ name, email, password });
-
     const savedUser = await newUser.save();
-
     res.status(201).json(savedUser);
   } catch (error) {
     res.status(500).json({ error: 'Server error' });
