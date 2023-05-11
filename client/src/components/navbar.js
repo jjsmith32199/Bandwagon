@@ -64,11 +64,11 @@ export default function ButtonAppBar() {
             </Box>
           ) : (
             <>
-              <Button color="inherit" component={RouterLink} to="/login">
+              <Button color="inherit" component={RouterLink} to="/loginForm">
                 Login
               </Button>
               <p>|</p>
-              <Button color="inherit" component={RouterLink} to="/register">
+              <Button color="inherit" component={RouterLink} to="/signUpForm">
                 Register
               </Button>
             </>
