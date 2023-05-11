@@ -1,8 +1,9 @@
 require('dotenv').config();
+const mongoose = require('mongoose');
 const axios = require('axios');
 const apiKey = process.env.SEATGEEK_API_KEY;
 const url = `https://api.seatgeek.com/2/events?client_id=${apiKey}`;
-const response = await axios.get(url);
+// const response = await axios.get(url);
 
 const artistSchema = new mongoose.Schema({
   artist_name: {
