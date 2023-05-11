@@ -26,6 +26,6 @@ If you have any questions please contact us:
 GitHub:
 
 - [AustinS86](https://github.com/AustinS86)
-- []()
+- [jjsmith32199](https://github.com/jjsmith32199)
 - []()
 - []()

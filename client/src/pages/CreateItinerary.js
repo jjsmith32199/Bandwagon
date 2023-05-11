@@ -63,6 +63,7 @@ const CreateItinerary = () => {
 
   const saveItinerary = () => {
     console.log("saveItinerary called");
+
     if (typeof setSavedItineraries === "function") {
       setSavedItineraries([
         ...savedItineraries,
@@ -316,10 +317,10 @@ const CreateItinerary = () => {
               Save Itinerary
             </Button>
             <Link to="/savedItinerary">
-              <Button variant="outlined" color="secondary">
-                View Saved Itineraries
-              </Button>
-            </Link>
+            <Button variant="outlined" color="secondary">
+              View Saved Itineraries
+            </Button>
+          </Link>
           </Grid>
         </Grid>
         <Grid container spacing={3}>

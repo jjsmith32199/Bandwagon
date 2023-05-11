@@ -2,7 +2,10 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3001",
+  "options": {
+    "allowedHosts": ["localhost", ".localhost"],
+    "proxy": "https://localhost:3001/"
+  },
   "dependencies": {
     "@apollo/client": "^3.7.13",
     "@emotion/react": "^11.11.0",
@@ -41,5 +44,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^4.15.0"
   }
 }
