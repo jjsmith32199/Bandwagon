@@ -23,3 +23,17 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const DELETE_SAVED_ITINERARY = gql`
+  mutation deleteSavedItinerary($itineraryId: ID!) {
+    deleteSavedItinerary(itineraryId: $itineraryId) {
+      _id
+      username
+      email
+      savedItineraries {
+        itineraryId
+        locations
+      }
+    }
+  }
+`;
