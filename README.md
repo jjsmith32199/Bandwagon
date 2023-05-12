@@ -27,5 +27,5 @@ GitHub:
 
 - [AustinS86](https://github.com/AustinS86)
 - [jjsmith32199](https://github.com/jjsmith32199)
-- []()
-- []()
+- [oscalenghe](https://github.com/oscalenghe)
+- [itsHaso](https://github.com/itsHaso)
