@@ -1,0 +1,11 @@
+.scroll-animation {
+    opacity: 0;
+    transform: translateY(50px); /* Adjust this value to control the starting position */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  }
+  
+  .scroll-animation.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
