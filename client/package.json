@@ -10,7 +10,7 @@
     "proxy": "https://localhost:3001/"
   },
   "dependencies": {
-    "@apollo/client": "^3.7.13",
+    "@apollo/client": "^3.7.14",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.16",

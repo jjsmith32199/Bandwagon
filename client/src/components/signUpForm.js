@@ -1,4 +1,6 @@
 import React from "react";
+import { useMutation } from "@apollo/client";
+import { ADD_USER } from "../utils/mutations";
 import {
   Box,
   Button,
@@ -9,17 +11,37 @@ import {
 } from "@mui/material";
 
 const SignupForm = ({ handleSignUp }) => {
-  const handleSubmit = (event) => {
+  const [addUser] = useMutation(ADD_USER);
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    console.log({
-      firstName: formData.get("firstName"),
-      lastName: formData.get("lastName"),
-      email: formData.get("email"),
-      password: formData.get("password"),
-    });
+    const firstName = formData.get("firstName");
+    const lastName = formData.get("lastName");
+    const email = formData.get("email");
+    const password = formData.get("password");
 
-    handleSignUp();
+    // Combine first name and last name into a single username
+    const username = `${firstName} ${lastName}`;
+
+    try {
+      const { data } = await addUser({
+        variables: {
+          username,
+          email,
+          password,
+        },
+      });
+
+      const token = data.addUser.token;
+      // Save the token to local storage
+      localStorage.setItem("token", token);
+
+      handleSignUp();
+    } catch (error) {
+      console.error(error);
+      // Display error message to the user
+    }
   };
 
   return (
