@@ -1,6 +1,5 @@
-const User = require('../models/User');
-
-
+const { User } = require('../models');
+const db = require('../config/connection');
 const userData = require('./userData.json');
 
 
