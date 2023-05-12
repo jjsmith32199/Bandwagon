@@ -61,4 +61,4 @@ async function populateDatabase() {
   }
 }
 
-populateDatabase();
+module.exports = Artist;

@@ -42,24 +42,36 @@ const LandingPage = () => {
           </Box>
         </Box>
       </Box>
+
+
       <ScrollAnimation>
-      <Box sx={{ mt: 5 }}>
-        <Grid container spacing={3}>
-          <Grid item xs={6}>
-            <Typography variant="h4">Jam. Drive. Repeat. </Typography>
-            <Typography variant="body1">
-            </Typography>
+         <Box sx={{ mt: 5 }}>
+          <Grid container spacing={3} alignItems="center">
+           <Grid item xs={12} md={6}>
+            <Typography variant="h5" sx={{ color: "#625F63", textAlign: "center" }}>
+             Hit the road. Find live music.
+           </Typography>
+           <Typography variant="body1" sx={{ textAlign: "center" }}>
+             <br />
+             Craft your perfect road trip experience.
+             <br />
+              Choose your destinations, discover live music en route.
+           </Typography>
+           <Box sx={{ mt: 4, textAlign: "center" }}>
+            <LaunchButton text="create my itinerary >" to="/CreateItinerary" />
+          </Box>
+           </Grid>
+            <Grid item xs={12} md={6}>
+               <img
+                  src={DescriptionImage}
+                  alt="a woman hanging out the window of a car"
+                  style={{ width: "100%", height: "auto" }}
+                />
+           </Grid>
           </Grid>
-          <Grid item xs={6}>
-            <img
-              src={DescriptionImage}
-              alt="a woman hanging out the window of a car"
-              style={{ width: "100%", height: "auto" }}
-            />
-          </Grid>
-        </Grid>
-      </Box>
+         </Box>
       </ScrollAnimation>
+
     </Container>
   );
 };
