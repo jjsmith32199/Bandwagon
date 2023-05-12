@@ -1,38 +1,40 @@
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
+const { JWT_SECRET } = require("../config");
 
-const secret = 'secret secret key';
-
-const generateJWT = (payload) => {
-  const expiresIn = '2h'; 
-  return jwt.sign(payload, secret, { expiresIn });
-};
-
-const verifyJWT = (token) => {
-  try {
-    const decoded = jwt.verify(token, secret);
-    return decoded;
-  } catch (error) {
-    console.log("Invalid token!");
-    return null;
-  }
-};
-
-const authMiddleware = (req, res, next) => { 
-  // look for the token in the headers of the incoming request
-  const token = req.headers.authorization || '';
-
-  // if a token is found, attempt to verify it and attach the decoded token to the request object
-  if (token) {
-    const decoded = verifyJWT(token);
-    req.user = decoded;
-  }
-
-  // proceed to the next middleware function or route handler
-  next();
-};
+const secret = JWT_SECRET;
+const expiration = "2h";
 
 module.exports = {
-  generateJWT,
-  verifyJWT,
-  authMiddleware,
+  authMiddleware: function (req, res, next) {
+    // look for the token in the headers of the incoming request
+    let token = req.query.token || req.headers.authorization;
+    console.log(token);
+    if (req.headers.authorization) {
+      token = token.split(" ").pop().trim();
+    }
+    // if a token is found, attempt to verify it and attach the decoded token to the request object
+    if (!token) {
+      return req;
+    }
+
+    try {
+      const { data } = jwt.verify(token, secret, { maxAge: expiration });
+      req.user = data;
+    } catch (err) {
+      return res.status(400).json({ message: "invalid token!" });
+    }
+
+    // proceed to the next middleware function or route handler
+    next();
+  },
+
+  signToken: function ({ username, email, _id }) {
+    const payload = { username, email, _id };
+    console.log(username);
+    const token = jwt.sign(payload, secret, {
+      expiresIn: expiration,
+    });
+    console.log("Signed Token: ", token);
+    return token;
+  },
 };
