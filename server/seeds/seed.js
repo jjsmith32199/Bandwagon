@@ -1,20 +1,13 @@
 const User = require('../models/User');
-const mongoose = require('mongoose');
+
+
 const userData = require('./userData.json');
 
-const seedDatabase = async () => {
-  try {
- 
-    await User.deleteMany();
-    await User.insertMany(userData);
 
-    console.log('Database seeded successfully!');
-  } catch (error) {
-    console.error('Error seeding database:', error);
-  } finally {
-    // Close the database connection (if needed)
-        mongoose.connection.close();
-  }
-};
+db.once('open', async () => {
+  await User.deleteMany({});
+  await User.create(userData);
 
-seedDatabase();
+  console.log('all done!');
+  process.exit(0);
+});
