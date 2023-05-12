@@ -1,7 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { CssBaseline } from "@mui/material";
+import { ApolloProvider } from "@apollo/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ApolloClient, InMemoryCache } from "@apollo/client";
 import Footer from "./components/Footer";
 import Navbar from "./components/navbar";
 import LandingPage from "./components/HomePage";
@@ -10,11 +12,16 @@ import SignUpForm from "./components/signUpForm";
 import CreateItinerary from "./pages/CreateItinerary";
 import SavedItinerary from "./pages/savedItinerary";
 
+const client = new ApolloClient({
+  uri: "http://localhost:3001/graphql",
+  cache: new InMemoryCache(),
+});
+
 const handleSignUp = () => {};
 const handleLogin = () => {};
 
 const App = () => (
-  <>
+  <ApolloProvider client={client}>
     <CssBaseline />
     <Router>
       <Navbar />
@@ -33,7 +40,7 @@ const App = () => (
       </Routes>
       <Footer />
     </Router>
-  </>
+  </ApolloProvider>
 );
 
 const rootElement = document.getElementById("root");

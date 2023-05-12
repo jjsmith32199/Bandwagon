@@ -1,4 +1,6 @@
 import React from "react";
+import { useMutation } from "@apollo/client";
+import { LOGIN_USER } from "../utils/mutations";
 import {
   Box,
   Button,
@@ -9,17 +11,27 @@ import {
 } from "@mui/material";
 
 const LoginForm = ({ handleLogin }) => {
+  const [loginUser] = useMutation(LOGIN_USER);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    console.log({
-      email: formData.get("email"),
-      password: formData.get("password"),
-    });
+    const email = formData.get("email");
+    const password = formData.get("password");
 
-    handleLogin();
+    loginUser({
+      variables: {
+        email,
+        password,
+      },
+    })
+      .then(() => {
+        handleLogin();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
-
   return (
     <Container maxWidth="xs">
       <Box
