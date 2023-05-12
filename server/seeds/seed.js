@@ -1,6 +1,5 @@
 const User = require('../models/User');
-
-
+const mongoose = require('mongoose');
 const userData = require('./userData.json');
 
 const seedDatabase = async () => {
