@@ -27,17 +27,18 @@ const LandingPage = () => {
             flexDirection: "column",
             textAlign: "center",
             p: 5,
-            mt: "-10vh"
+            mt: "-10vh",
           }}
         >
-          <Typography variant="h2" sx={{ color: "#625F63"}}>
+          <Typography variant="h2" sx={{ color: "#625F63" }}>
             Bandwagon.
           </Typography>
+
           <Typography variant="body1">
             A new meaning to listening to music on the go.
           </Typography>
           <Box sx={{ mt: 4 }}>
-            <LaunchButton text="Get Started >" />
+            <LaunchButton text="Get Started >" to="/signUpForm" />
           </Box>
         </Box>
       </Box>
@@ -47,7 +48,6 @@ const LandingPage = () => {
           <Grid item xs={6}>
             <Typography variant="h4">Jam. Drive. Repeat. </Typography>
             <Typography variant="body1">
-             
             </Typography>
           </Grid>
           <Grid item xs={6}>

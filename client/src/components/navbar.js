@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { Link } from "react-router-dom";
 
 // import profileImageURL from ""; replace src on line 51 with {{profileImageURL}}
 
@@ -37,7 +38,9 @@ export default function ButtonAppBar() {
             style={{ marginLeft: 26 }}
             sx={{ flexGrow: 1 }}
           >
-            Bandwagon
+            <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+              Bandwagon
+            </Link>
           </Typography>
           {loggedIn ? (
             <Box sx={{ display: "flex", alignItems: "center" }}>
