@@ -25,17 +25,18 @@ const LandingPage = () => {
             flexDirection: "column",
             textAlign: "center",
             p: 5,
-            mt: "-10vh"
+            mt: "-10vh",
           }}
         >
-          <Typography variant="h2" sx={{ color: "#625F63"}}>
+          <Typography variant="h2" sx={{ color: "#625F63" }}>
             Bandwagon.
           </Typography>
+
           <Typography variant="body1">
             A new meaning to listening to music on the go.
           </Typography>
           <Box sx={{ mt: 4 }}>
-            <LaunchButton text="Get Started >" />
+            <LaunchButton text="Get Started >" to="/signUpForm" />
           </Box>
         </Box>
       </Box>
@@ -44,8 +45,13 @@ const LandingPage = () => {
           <Grid item xs={6}>
             <Typography variant="h4">App Description</Typography>
             <Typography variant="body1">
-              Our app is designed to provide an amazing user experience. It
-              offers a range of features, including...
+              Bandwagon is a web application that allows users to create a road
+              trip itinerary based on their music preferences. Users can enter a
+              starting location and ending location, and Bandwagon will generate
+              a road trip itinerary with stops at cities along the way. The
+              cities are chosen based on the user’s music preferences, and the
+              itinerary is generated using the Google Maps API. Users can save
+              their itineraries and view them later.
             </Typography>
           </Grid>
           <Grid item xs={6}>
