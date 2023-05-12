@@ -58,7 +58,7 @@ const LandingPage = () => {
               Choose your destinations, discover live music en route.
            </Typography>
            <Box sx={{ mt: 4, textAlign: "center" }}>
-            <LaunchButton text="create my itinerary >" to="/signUpForm" />
+            <LaunchButton text="create my itinerary >" to="/CreateItinerary" />
           </Box>
            </Grid>
             <Grid item xs={12} md={6}>
