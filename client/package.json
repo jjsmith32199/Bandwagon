@@ -7,7 +7,7 @@
       "localhost",
       ".localhost"
     ],
-    "proxy": "https://localhost:3001/"
+    "proxy": "http://localhost:3001/"
   },
   "dependencies": {
     "@apollo/client": "^3.7.14",

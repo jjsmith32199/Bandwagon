@@ -6,7 +6,7 @@ import {
   InMemoryCache,
   createHttpLink,
 } from "@apollo/client";
-import client from "./utils/apolloClient";
+import { setContext } from "@apollo/client/link/context";
 import "./App.css";
 import LandingPage from "./components/HomePage";
 import LoginForm from "./components/loginForm";
@@ -29,6 +29,25 @@ function App() {
     setIsLogged(true);
     history.push("/CreateItinerary");
   };
+
+  const httpLink = createHttpLink({
+    uri: "http://localhost:3001/graphql",
+  });
+
+  const authLink = setContext((_, { headers }) => {
+    const token = localStorage.getItem("token");
+    return {
+      headers: {
+        ...headers,
+        authorization: token ? `Bearer ${token}` : "",
+      },
+    };
+  });
+
+  const client = new ApolloClient({
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache(),
+  });
 
   const renderCreateItinerary = () => {
     return isLoggedIn ? (

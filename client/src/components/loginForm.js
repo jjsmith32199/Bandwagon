@@ -10,16 +10,20 @@ import {
   Typography,
 } from "@mui/material";
 
-const LoginForm = ({ handleLogin }) => {
-  const [loginUser] = useMutation(LOGIN_USER);
+const headers = {
+  "Content-Type": "application/json",
+};
 
-  const handleSubmit = (event) => {
+const LoginForm = ({ handleLogin }) => {
+  const [loginUser] = useMutation(LOGIN_USER, { context: { headers } });
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const email = formData.get("email");
     const password = formData.get("password");
 
-    loginUser({
+    await loginUser({
       variables: {
         email,
         password,

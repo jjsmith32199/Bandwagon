@@ -10,8 +10,12 @@ import {
   Typography,
 } from "@mui/material";
 
+const headers = {
+  "Content-Type": "application/json",
+};
+
 const SignupForm = ({ handleSignUp }) => {
-  const [addUser] = useMutation(ADD_USER);
+  const [addUser] = useMutation(ADD_USER, { context: { headers } });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
