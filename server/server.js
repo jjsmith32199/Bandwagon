@@ -55,9 +55,10 @@ const server = new ApolloServer({
   },
 });
 
+server.applyMiddleware({ app });
+
 app.use(routes);
 
-server.applyMiddleware({ app });
 
 db.once("open", () => {
   app.listen(PORT, () => {
