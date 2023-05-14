@@ -15,7 +15,7 @@ const headers = {
 };
 
 const SignupForm = ({ handleSignUp }) => {
-  const [addUser] = useMutation(ADD_USER, { context: { headers } });
+  const [signup] = useMutation(ADD_USER, { context: { headers } });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -26,12 +26,13 @@ const SignupForm = ({ handleSignUp }) => {
     const password = formData.get("password");
 
     // Combine first name and last name into a single username
-    const username = `${firstName} ${lastName}`;
+    // const username = `${firstName} ${lastName}`;
 
     try {
-      const { data } = await addUser({
+      const { data } = await signup({
         variables: {
-          username,
+          firstName,
+          lastName,
           email,
           password,
         },

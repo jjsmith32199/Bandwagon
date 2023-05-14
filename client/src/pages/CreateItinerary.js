@@ -108,6 +108,7 @@ const CreateItinerary = () => {
     });
   };
 
+  const midPoint = useRef(null);
   // Fetch events
   useEffect(() => {
     const fetchEvents = async () => {

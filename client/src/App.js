@@ -15,6 +15,8 @@ import CreateItinerary from "./pages/CreateItinerary";
 import SavedItinerary from "./pages/savedItinerary";
 import UserProfile from "./components/UserProfile";
 import { useNavigate } from "react-router-dom";
+import Navbar from "./components/navbar";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -80,9 +82,9 @@ function RoutesApp() {
     const token = localStorage.getItem("auth-token");
     if (token) {
       setIsLogged(true);
-      navigate("/UserProfile");
     } else {
       setIsLogged(false);
+      navigate("/");
     }
 
     return () => {
@@ -94,6 +96,7 @@ function RoutesApp() {
   return (
     <ApolloProvider client={client}>
       <div className="App">
+        <Navbar />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route
@@ -111,6 +114,7 @@ function RoutesApp() {
             element={<SavedItinerary savedItineraries={savedItineraries} />}
           />
         </Routes>
+        <Footer />
       </div>
     </ApolloProvider>
   );

@@ -15,9 +15,14 @@ const resolvers = {
   Mutation: {
     signup: async (parent, { firstName, lastName, email, password }) => {
       try {
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+          throw new Error("User already exists");
+        }
         const user = await User.create({
           firstName,
           lastName,
+          username: `${firstName} ${lastName}`,
           email,
           password,
         });
@@ -25,6 +30,7 @@ const resolvers = {
         return { token, user };
       } catch (error) {
         console.error("Signup error: ", error);
+        throw new Error(`Signup failed: ${error.message}`);
       }
     },
     login: async (parent, { email, password }) => {
