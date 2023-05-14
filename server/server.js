@@ -39,6 +39,8 @@ if (process.env.NODE_ENV === "production") {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  playground: true,
+  introspection: true,
   context: async ({ req }) => {
     const token = req.headers.authorization || "";
     console.log("Token: ", token);
@@ -62,7 +64,9 @@ const server = new ApolloServer({
 });
 server.applyMiddleware({ app });
 
+
 app.use(routes);
+
 
 db.once("open", () => {
   app.listen(PORT, () => {

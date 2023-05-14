@@ -9,6 +9,7 @@ const resolvers = {
           populate: "venue",
         });
 
+
         // Map the MongoDB documents to match the GraphQL schema
         return artists.map((artist) => ({
           id: artist._id.toString(),
@@ -23,6 +24,7 @@ const resolvers = {
     },
     // ...
   },
+
 };
 
 module.exports = resolvers;
