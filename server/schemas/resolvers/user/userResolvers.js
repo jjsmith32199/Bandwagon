@@ -44,7 +44,7 @@ const resolvers = {
         return { token, user };
       } catch (error) {
         console.error("Login error: ", error);
-        throw new Error("An error occurred while logging in");
+        throw error;
       }
     },
   },

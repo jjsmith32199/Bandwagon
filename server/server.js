@@ -49,10 +49,10 @@ const server = new ApolloServer({
       let user = null;
       if (token && token.startsWith("Bearer")) {
         const actualToken = token.slice(7);
-        console.log("Token to be verified: ", token);
+        console.log("Token to be verified: ", actualToken);
         const data = jwt.verify(actualToken, JWT_SECRET);
         console.log("Data: ", data);
-        user = await User.findByID(data._id);
+        user = await User.findById(data._id);
         console.log("User: ", user);
       }
       return { user, signToken };
@@ -64,9 +64,7 @@ const server = new ApolloServer({
 });
 server.applyMiddleware({ app });
 
-
 app.use(routes);
-
 
 db.once("open", () => {
   app.listen(PORT, () => {

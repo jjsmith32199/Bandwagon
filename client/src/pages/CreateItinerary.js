@@ -126,26 +126,56 @@ const CreateItinerary = () => {
         );
 
         if (isFinite(midPoint.lat) && isFinite(midPoint.lng)) {
-          const response = await axios.get(
-            `https://api.seatgeek.com/2/events?lat=${midPoint.lat}&lon=${midPoint.lng}&range=100mi&type=concert&client_id=NjkxODY3NXwxNjgzNDAyMzA3LjQzNjgwMjY`
-          );
+          try {
+            const response = await axios.get(
+              `https://api.seatgeek.com/2/events?lat=${midPoint.lat}&lon=${midPoint.lng}&range=100mi&type=concert&client_id=NjkxODY3NXwxNjgzNDAyMzA3LjQzNjgwMjY`
+            );
 
-          if (response.data && response.data.events) {
-            const currentTime = new Date();
+            if (response.data && response.data.events) {
+              const currentTime = new Date();
 
-            const filteredEvents = response.data.events.filter((event) => {
-              const eventTime = new Date(event.datetime_local);
-              return eventTime > currentTime;
-            });
+              const filteredEvents = response.data.events.filter((event) => {
+                const eventTime = new Date(event.datetime_local);
+                return eventTime > currentTime;
+              });
 
-            setEvents(filteredEvents);
+              setEvents(filteredEvents);
+            }
+          } catch (error) {
+            // Handle error if API request fails
           }
         }
       } else {
         setEvents([]);
       }
     };
-    fetchEvents();
+
+    const fetchData = async () => {
+      await fetchEvents();
+    };
+
+    fetchData();
+    return () => {
+      const source = axios.CancelToken.source();
+      const cancelToken = source.token;
+
+      axios
+        .get(
+          `https://api.seatgeek.com/2/events?lat=${midPoint.lat}&lon=${midPoint.lng}&range=100mi&type=concert&client_id=NjkxODY3NXwxNjgzNDAyMzA3LjQzNjgwMjY`,
+          { cancelToken }
+        )
+        .then((response) => {})
+        .catch((error) => {
+          if (axios.isCancel(error)) {
+            console.log("Request canceled", error.message);
+          } else {
+          }
+        });
+
+      return () => {
+        source.cancel();
+      };
+    };
   }, [selectedCities]);
 
   const handleSearch = (e) => {
@@ -208,7 +238,7 @@ const CreateItinerary = () => {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <LoadScript
-              googleMapsApiKey="AIzaSyDb4jTjuzUWIXLmRhJF8ZWb2Z9UumbKT2s"
+              googleMapsApiKey="AIzaSyCTRDgdeo20kDLLxMRrewL2Coi-TrAWF8c"
               libraries={libraries}
             >
               <Autocomplete
@@ -271,7 +301,7 @@ const CreateItinerary = () => {
             <Typography variant="h6">Route Map</Typography>
             <Box sx={{ height: "calc(2 * (200px + 16px))", mt: 2, mb: 2 }}>
               <LoadScript
-                googleMapsApiKey="AIzaSyDb4jTjuzUWIXLmRhJF8ZWb2Z9UumbKT2s"
+                googleMapsApiKey="AIzaSyCTRDgdeo20kDLLxMRrewL2Coi-TrAWF8c"
                 libraries={libraries}
               >
                 <GoogleMap
@@ -317,10 +347,10 @@ const CreateItinerary = () => {
               Save Itinerary
             </Button>
             <Link to="/savedItinerary">
-            <Button variant="outlined" color="secondary">
-              View Saved Itineraries
-            </Button>
-          </Link>
+              <Button variant="outlined" color="secondary">
+                View Saved Itineraries
+              </Button>
+            </Link>
           </Grid>
         </Grid>
         <Grid container spacing={3}>

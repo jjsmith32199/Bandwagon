@@ -5,7 +5,7 @@ export const LOGIN_USER = gql`
     login(email: $email, password: $password) {
       token
       user {
-        _id
+        id
         email
       }
     }
@@ -17,7 +17,7 @@ export const ADD_USER = gql`
     addUser(username: $username, email: $email, password: $password) {
       token
       user {
-        _id
+        id
         username
       }
     }
@@ -27,7 +27,7 @@ export const ADD_USER = gql`
 export const DELETE_SAVED_ITINERARY = gql`
   mutation deleteSavedItinerary($itineraryId: ID!) {
     deleteSavedItinerary(itineraryId: $itineraryId) {
-      _id
+      id
       username
       email
       savedItineraries {
