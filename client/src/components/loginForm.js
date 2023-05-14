@@ -10,12 +10,8 @@ import {
   Typography,
 } from "@mui/material";
 
-const headers = {
-  "Content-Type": "application/json",
-};
-
 const LoginForm = ({ handleLogin }) => {
-  const [loginUser] = useMutation(LOGIN_USER, { context: { headers } });
+  const [loginUser] = useMutation(LOGIN_USER);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -23,19 +19,26 @@ const LoginForm = ({ handleLogin }) => {
     const email = formData.get("email");
     const password = formData.get("password");
 
-    await loginUser({
-      variables: {
-        email,
-        password,
-      },
-    })
-      .then(() => {
-        handleLogin();
-      })
-      .catch((error) => {
-        console.error(error);
+    try {
+      const { data } = await loginUser({
+        variables: {
+          email,
+          password,
+        },
       });
+
+      handleLogin();
+
+      if (data) {
+        const { token } = data.login;
+        localStorage.setItem("auth-token", token);
+        // handle the user data as you need
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
+
   return (
     <Container maxWidth="xs">
       <Box
