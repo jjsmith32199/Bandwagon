@@ -19,6 +19,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json());
+app.use((req, res, next) => {
+  console.log("Request URL: ", req.originalUrl);
+  console.log("Request headers: ", req.headers);
+  next();
+});
 
 // if we're in production, serve client/build as static assets
 if (process.env.NODE_ENV === "production") {
@@ -36,6 +41,7 @@ const server = new ApolloServer({
   resolvers,
   context: async ({ req }) => {
     const token = req.headers.authorization || "";
+    console.log("Token: ", token);
 
     try {
       let user = null;
@@ -43,19 +49,20 @@ const server = new ApolloServer({
         const actualToken = token.slice(7);
         console.log("Token to be verified: ", token);
         const data = jwt.verify(actualToken, JWT_SECRET);
+        console.log("Data: ", data);
         user = await User.findByID(data._id);
+        console.log("User: ", user);
       }
       return { user, signToken };
     } catch (error) {
-      console.log("Invalid token!");
+      console.log("constext error: ", error);
       return {};
     }
   },
 });
+server.applyMiddleware({ app });
 
 app.use(routes);
-
-server.applyMiddleware({ app });
 
 db.once("open", () => {
   app.listen(PORT, () => {
