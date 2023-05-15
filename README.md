@@ -5,8 +5,10 @@
 - [Description](#description)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Internal](#internal)
-- [Future Development](#future-development)
+- [API](#api)
+- [NPM'S](#npms)
+- [Application Link](#application-link)
+- [Screenshot](#screenshot)
 - [Questions](#questions)
 
 ## Description
@@ -27,6 +29,13 @@ BandWagon was created with the use of the following API's:
 - Dotenv
 - Apollo
 - Node.js
+
+## Application Link 
+
+## Screenshot
+![Homepage](https://github.com/jjsmith32199/Bandwagon/assets/117120566/d3a71a87-47c3-4168-af96-d6acc4e10ac3)
+![Itinerary](https://github.com/jjsmith32199/Bandwagon/assets/117120566/7a8c7174-7183-457e-955d-93f8f4792210)
+
 
 ## Questions
 
