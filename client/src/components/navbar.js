@@ -35,8 +35,7 @@ export default function ButtonAppBar() {
           <Typography
             variant="h6"
             component="div"
-            style={{ marginLeft: 26 }}
-            sx={{ flexGrow: 1 }}
+            sx={{ flexGrow: 1, textAlign: "left" }}
           >
             <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
               Bandwagon
