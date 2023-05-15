@@ -15,7 +15,7 @@
 BandWagon is an all new platform that helps travellers and music lovers alike plan the ideal roadtrip.
 ## Installation
 Simply click on the supplied Heroku link to the deployed application:
-'heroku.link.here'
+[Bandwagon](https://whispering-island-08807.herokuapp.com/)
 ## Usage
 On the homepage, click 'Get Started' to create your account. You will then be directed to the itinerary creator. Input a start point and end point for your trip and you will then be shown a selection of shows playing in those areas. Users can click on the links to the shows to purchase tickets.
 ## API
@@ -31,6 +31,7 @@ BandWagon was created with the use of the following API's:
 - Node.js
 
 ## Application Link 
+[Bandwagon](https://whispering-island-08807.herokuapp.com/)
 
 ## Screenshot
 ![Homepage](https://github.com/jjsmith32199/Bandwagon/assets/117120566/d3a71a87-47c3-4168-af96-d6acc4e10ac3)
