@@ -32,10 +32,6 @@ function RoutesApp() {
   const navigate = useNavigate();
   const isMountedRef = useRef(false);
 
-  const httpLink = createHttpLink({
-    uri: "http://localhost:3001/graphql",
-  });
-
   const authLink = setContext((_, { headers }) => {
     const token = localStorage.getItem("auth-token");
     return {
@@ -44,6 +40,13 @@ function RoutesApp() {
         authorization: token ? `Bearer ${token}` : "",
       },
     };
+  });
+
+  const httpLink = createHttpLink({
+    uri:
+      process.env.NODE_ENV === "production"
+        ? "https://whispering-island-08807.herokuapp.com/graphql"
+        : "http://localhost:3001/graphql",
   });
 
   const client = new ApolloClient({
