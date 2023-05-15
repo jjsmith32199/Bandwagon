@@ -15,7 +15,7 @@ BandWagon is an all new platform that helps travellers and music lovers alike pl
 Simply click on the supplied Heroku link to the deployed application:
 'heroku.link.here'
 ## Usage
-On the homepae, click 'Get Started' to create your account. You will then be directed to the itinerary creator. Input a start point and end point for your trip and you will then be shown a selection of shows playing in those areas. Users can click on the links to the shows to purchase tickets.
+On the homepage, click 'Get Started' to create your account. You will then be directed to the itinerary creator. Input a start point and end point for your trip and you will then be shown a selection of shows playing in those areas. Users can click on the links to the shows to purchase tickets.
 ## API
 BandWagon is powered by the Google Maps and SeatGeek API's
 ## NPM'S
