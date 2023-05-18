@@ -24,6 +24,20 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+
+  savedItineraries: [
+    {
+      itineraryId: {
+        type: String,
+        required: true,
+      },
+      locations: [
+        {
+          type: String,
+        },
+      ],
+    },
+  ],
 });
 
 userSchema.pre("save", async function (next) {

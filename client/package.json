@@ -2,13 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "options": {
-    "allowedHosts": [
-      "localhost",
-      ".localhost"
-    ],
-    "proxy": "http://localhost:3001/"
-  },
+  "proxy": "http://localhost:3001/",
   "dependencies": {
     "@apollo/client": "^3.7.14",
     "@emotion/react": "^11.11.0",

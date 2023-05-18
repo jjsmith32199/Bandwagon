@@ -62,6 +62,13 @@ const server = new ApolloServer({
     }
   },
 });
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
+
 server.applyMiddleware({ app });
 
 app.use(routes);

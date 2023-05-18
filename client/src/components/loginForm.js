@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 
-const LoginForm = ({ handleLogin }) => {
+const LoginForm = ({ setIsLogged, navigate }) => {
   const [loginUser] = useMutation(LOGIN_USER);
 
   const handleSubmit = async (event) => {
@@ -19,6 +19,10 @@ const LoginForm = ({ handleLogin }) => {
     const email = formData.get("email");
     const password = formData.get("password");
 
+    handleLogin(email, password);
+  };
+
+  const handleLogin = async (email, password) => {
     try {
       const { data } = await loginUser({
         variables: {
@@ -27,15 +31,15 @@ const LoginForm = ({ handleLogin }) => {
         },
       });
 
-      handleLogin();
-
-      if (data) {
+      if (data && data.login) {
         const { token } = data.login;
         localStorage.setItem("auth-token", token);
-        // handle the user data as you need
+        setIsLogged(true);
+        navigate("/userProfile");
       }
     } catch (error) {
       console.error(error);
+      // Handle error logging in
     }
   };
 
