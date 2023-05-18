@@ -12,13 +12,13 @@ import { Link } from "react-router-dom";
 
 // import profileImageURL from ""; replace src on line 51 with {{profileImageURL}}
 
-export default function ButtonAppBar() {
-  const [loggedIn, setLoggedIn] = React.useState(false);
+export default function ButtonAppBar({ loggedIn, handleLogout }) {
+  // const [loggedIn, setLoggedIn] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleLogout = () => {
-    setLoggedIn(false);
-  };
+  // const handleLogout = () => {
+  //   setLoggedIn(false);
+  // };
 
   const handleProfileClick = (event) => {
     setAnchorEl(event.currentTarget);

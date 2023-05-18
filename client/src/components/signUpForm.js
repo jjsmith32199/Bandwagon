@@ -38,7 +38,7 @@ const SignupForm = ({ handleSignUp }) => {
         },
       });
 
-      const token = data.addUser.token;
+      const token = data.signup.token;
       // Save the token to local storage
       localStorage.setItem("token", token);
 

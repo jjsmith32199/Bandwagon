@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import {
   ApolloClient,
@@ -19,15 +19,16 @@ import Navbar from "./components/navbar";
 import Footer from "./components/Footer";
 
 function App() {
+  const [isLoggedIn, setIsLogged] = useState(false); // set to false for testing
   return (
     <BrowserRouter>
-      <RoutesApp />
+      <RoutesApp isLoggedIn={isLoggedIn} setIsLogged={setIsLogged} />
     </BrowserRouter>
   );
 }
 
-function RoutesApp() {
-  const [isLoggedIn, setIsLogged] = useState(false); // set to false for testing
+function RoutesApp({ isLoggedIn, setIsLogged }) {
+  // const [isLoggedIn, setIsLogged] = useState(false); // set to false for testing
   const [savedItineraries, setSavedItineraries] = useState([]);
   const navigate = useNavigate();
   const isMountedRef = useRef(false);
@@ -43,10 +44,7 @@ function RoutesApp() {
   });
 
   const httpLink = createHttpLink({
-    uri:
-      process.env.NODE_ENV === "production"
-        ? "https://whispering-island-08807.herokuapp.com/graphql"
-        : "http://localhost:3001/graphql",
+    uri: "http://localhost:3001/graphql",
   });
 
   const client = new ApolloClient({
@@ -67,6 +65,14 @@ function RoutesApp() {
       navigate("/userProfile");
     }
   };
+
+  const handleLogout = useCallback(() => {
+    if (isMountedRef.current) {
+      setIsLogged(false);
+      localStorage.removeItem("auth-token");
+      navigate("/");
+    }
+  }, [setIsLogged, navigate]);
 
   const renderCreateItinerary = () => {
     return isLoggedIn ? (
@@ -94,17 +100,23 @@ function RoutesApp() {
       isMountedRef.current = false;
       // Cleanup tasks (cancel subscriptions, clear timeouts/intervals, etc.)
     };
-  }, [navigate]);
+  }, [handleLogout, navigate, setIsLogged]);
 
   return (
     <ApolloProvider client={client}>
       <div className="App">
-        <Navbar />
+        <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route
             path="/loginForm"
-            element={<LoginForm handleLogin={handleLogin} />}
+            element={
+              <LoginForm
+                handleLogin={handleLogin}
+                setIsLogged={setIsLogged}
+                navigate={navigate}
+              />
+            }
           />
           <Route
             path="/signUpForm"
