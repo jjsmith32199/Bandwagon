@@ -1,0 +1,483 @@
+[33mcommit af254add73f7af9ae42c25ee69cdfa1ea4f87f60[m[33m ([m[1;36mHEAD -> [m[1;32mrevert-sync-change[m[33m, [m[1;31mheroku/main[m[33m, [m[1;32mmain[m[33m)[m
+Author: Austin Stancil <117120566+AustinS86@users.noreply.github.com>
+Date:   Thu May 18 20:07:03 2023 -0400
+
+    updated .env
+
+[33mcommit c4b51aec4a2174e9a5b15a3a90802667b562cda1[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: c6d7d40 c84f21e
+Author: Austin Stancil <117120566+AustinS86@users.noreply.github.com>
+Date:   Wed May 17 21:59:07 2023 -0400
+
+    Merge pull request #61 from jjsmith32199/client-side
+    
+    fixed the login and register buttons
+
+[33mcommit c84f21efb20988cf4c1b84c7cad02600e926d82b[m
+Author: Austin Stancil <117120566+AustinS86@users.noreply.github.com>
+Date:   Wed May 17 21:56:05 2023 -0400
+
+    fixed the login and register buttons
+
+[33mcommit c6d7d40050105727a1ed72ccfe4114af3a63e301[m
+Merge: ff83d06 46b09d3
+Author: itsHaso <117330115+itsHaso@users.noreply.github.com>
+Date:   Mon May 15 20:16:25 2023 -0400
+
+    Merge pull request #60 from jjsmith32199/oscalenghe-patch-1
+    
+    Update README.md
+
+[33mcommit 46b09d33c3979d4955a9f2aacaa1085187c0d637[m[33m ([m[1;31morigin/oscalenghe-patch-1[m[33m)[m
+Author: Olivia Scalenghe <42279508+oscalenghe@users.noreply.github.com>
+Date:   Mon May 15 18:34:09 2023 -0400
+
+    Update README.md
+
+[33mcommit ff83d06c483f7f8f09be3a5847e6e85706ff732f[m
+Merge: 253a38e 66fa57f
+Author: itsHaso <117330115+itsHaso@users.noreply.github.com>
+Date:   Mon May 15 17:20:55 2023 -0400
+
+    Merge pull request #59 from jjsmith32199/client-side
+    
+    moved some files in diffrernt orders to fix issues
+
+[33mcommit 66fa57f96d88662d36fb8f5a525990593b18500a[m
+Author: Austin Stancil <117120566+AustinS86@users.noreply.github.com>
+Date:   Mon May 15 17:17:00 2023 -0400
+
+    moved some files in diffrernt orders to fix issues
+
+[33mcommit 253a38e68165e8c6949bd26f1a354c474f8b0fb2[m
+Merge: 6da72a9 890a7ff
+Author: Olivia Scalenghe <42279508+oscalenghe@users.noreply.github.com>
+Date:   Mon May 15 16:02:03 2023 -0400
+
+    Merge pull request #58 from jjsmith32199/AustinS86-patch-1
+    
+    Update README.md
+
+[33mcommit 890a7fff8099b5d70f9e86b02bde17f633ffb197[m[33m ([m[1;31morigin/AustinS86-patch-1[m[33m)[m
+Author: Austin Stancil <117120566+AustinS86@users.noreply.github.com>
+Date:   Mon May 15 15:58:54 2023 -0400
+
+    Update README.md
+    
+    added screenshots
+
+[33mcommit 6da72a91d185ec88f6e7b072d5ef302cba5ad7c7[m
+Merge: 61821b8 b84a6a0
+Author: jjsmith32199 <113246711+jjsmith32199@users.noreply.github.com>
+Date:   Mon May 15 15:26:09 2023 -0400
+
+    Merge pull request #57 from jjsmith32199/client-side
+    
+    updated the httpLink in app.js
+
+[33mcommit b84a6a0d7e62920fa6fc3e730cdaf1e126a1b59a[m
+Author: Austin Stancil <117120566+AustinS86@users.noreply.github.com>
+Date:   Mon May 15 15:11:07 2023 -0400
+
+    updated the httpLink in app.js
+
+[33mcommit 61821b88e2ecb15d82a5f7e700c4082ecc0a4067[m
+Merge: 4ac9b60 4bd86bf
+Author: jjsmith32199 <113246711+jjsmith32199@users.noreply.github.com>
+Date:   Sun May 14 21:54:12 2023 -0400
+
+    Merge pull request #56 from jjsmith32199/client-side
+    
+    add web vitals
+
+[33mcommit 4bd86bf25ec2eb0d784011a3c75836762b4db3fe[m
+Author: Austin Stancil <117120566+AustinS86@users.noreply.github.com>
+Date:   Sun May 14 21:53:46 2023 -0400
+
+    add web vitals
+
+[33mcommit 4ac9b60d6499e038d79da9b9c2051f491aea6a2d[m
+Author: jjsmith32199 <113246711+jjsmith32199@users.noreply.github.com>
+Date:   Sun May 14 21:06:51 2023 -0400
+
+    Update README.md
+
+[33mcommit ca501ad0a2954f273ae74fa7f9638a58874b1fd6[m
+Merge: 8839c47 5b3600b
+Author: Olivia Scalenghe <42279508+oscalenghe@users.noreply.github.com>
+Date:   Sun May 14 21:06:04 2023 -0400
+
+    Merge pull request #55 from jjsmith32199/client-side
+    
+    fixed port number in .env
+
+[33mcommit 5b3600ba71c9ed9542242897df19ba37be8a18b1[m
+Author: Austin Stancil <117120566+AustinS86@users.noreply.github.com>
+Date:   Sun May 14 21:05:32 2023 -0400
+
+    fixed port number in .env
+
+[33mcommit 8839c47e6173ad011d653ca34fb4303f77783fa0[m
+Merge: a7a66a9 0b98f83
+Author: jjsmith32199 <113246711+jjsmith32199@users.noreply.github.com>
+Date:   Sun May 14 20:54:03 2023 -0400
+
+    Merge pull request #54 from jjsmith32199/client-side
+    
+    added mongodb
+
+[33mcommit 0b98f839c3a9bf5846587aa1d8ad8508f2e5a0fd[m
+Author: Austin Stancil <117120566+AustinS86@users.noreply.github.com>
+Date:   Sun May 14 20:53:17 2023 -0400
+
+    added mongodb
+
+[33mcommit a7a66a919b4d08e9def0360297820c8f0225b923[m
+Merge: bb6684e f0776a1
+Author: Olivia Scalenghe <42279508+oscalenghe@users.noreply.github.com>
+Date:   Sun May 14 20:16:29 2023 -0400
+
+    Merge pull request #53 from jjsmith32199/client-side
+    
+    changed title name
+
+[33mcommit f0776a13d6e72d57877ce28f2e722c513d8546c3[m
+Author: Austin Stancil <117120566+AustinS86@users.noreply.github.com>
+Date:   Sun May 14 20:06:53 2023 -0400
+
+    changed title name
+
+[33mcommit bb6684e05c1d2db8885d618eebc0a5f3807d6e75[m
+Merge: 9164192 cc193e6
+Author: jjsmith32199 <113246711+jjsmith32199@users.noreply.github.com>
+Date:   Sun May 14 20:01:53 2023 -0400
+
+    Merge pull request #52 from jjsmith32199/hasan_additions
+    
+    navbar update
+
+[33mcommit cc193e6d1707bec39735cade0e4e907a322afaa3[m[33m ([m[1;31morigin/hasan_additions[m[33m)[m
+Author: itsHaso <117330115+itsHaso@users.noreply.github.com>
+Date:   Sun May 14 20:00:46 2023 -0400
+
+    navbar update
+
+[33mcommit 9164192b1d81b928be54dac026bc94fe42aa4f85[m
+Merge: c82f5a5 f1ac887
+Author: jjsmith32199 <113246711+jjsmith32199@users.noreply.github.com>
+Date:   Sun May 14 19:29:28 2023 -0400
+
+    Merge pull request #51 from jjsmith32199/client-side
+    
+    signup still broken. will fix asap!
+
+[33mcommit f1ac88730cc23bcaab4bbdfcbc81d804c66932a5[m
+Author: Austin Stancil <117120566+AustinS86@users.noreply.github.com>
+Date:   Sun May 14 19:28:52 2023 -0400
+
+    signup still broken. will fix asap!
+
+[33mcommit c82f5a59148c2a035984650f26f308fa1fea2fae[m
+Merge: 6fe362c 1979602
+Author: jjsmith32199 <113246711+jjsmith32199@users.noreply.github.com>
+Date:   Sun May 14 18:10:15 2023 -0400
+
+    Merge pull request #50 from jjsmith32199/client-side
+    
+    updated so much stuff but still broken AF
+
+[33mcommit 197960296cea088cd8b4a98ab3c1783a5bdd6676[m
+Author: Austin Stancil <117120566+AustinS86@users.noreply.github.com>
+Date:   Sun May 14 18:09:31 2023 -0400
+
+    updated so much stuff but still broken AF
+
+[33mcommit 6fe362c0a989482ac6cb435380ef4243f2081290[m
+Merge: 6cf1278 19d5aa3
+Author: itsHaso <117330115+itsHaso@users.noreply.github.com>
+Date:   Sat May 13 22:55:47 2023 -0400
+
+    Merge pull request #49 from jjsmith32199/client-side
+    
+    added console.logs
+
+[33mcommit 19d5aa30afc7f461468ca1c93dfd71a64f56f716[m
+Merge: 159c52d 6cf1278
+Author: itsHaso <117330115+itsHaso@users.noreply.github.com>
+Date:   Sat May 13 22:55:35 2023 -0400
+
+    Merge branch 'main' into client-side
+
+[33mcommit 159c52dff76ba95d91e9ea0b50bad3f4ecf15706[m
+Author: Austin Stancil <117120566+AustinS86@users.noreply.github.com>
+Date:   Sat May 13 22:43:56 2023 -0400
+
+    added console.logs
+
+[33mcommit 6cf12780a63a05bbd30c569fff91c7bb792af4f7[m
+Merge: 45d3c8a 7b3b633
+Author: itsHaso <117330115+itsHaso@users.noreply.github.com>
+Date:   Sat May 13 22:42:16 2023 -0400
+
+    Merge pull request #48 from jjsmith32199/userProfile
+    
+    created UserProfile page
+
+[33mcommit 7b3b6336984fc39481d38ea2b4c307579416d27c[m[33m ([m[1;31morigin/userProfile[m[33m)[m
+Author: jjsmith32199 <113246711+jjsmith32199@users.noreply.github.com>
+Date:   Sat May 13 22:42:38 2023 -0400
+
+    created UserProfile page
+
+[33mcommit 45d3c8a2c4f24c265ebd896da4815fc4f882e79f[m
+Merge: 40b7d37 1e4aa96
+Author: jjsmith32199 <113246711+jjsmith32199@users.noreply.github.com>
+Date:   Sat May 13 22:41:23 2023 -0400
+
+    Merge pull request #47 from jjsmith32199/hasan_additions
+    
+    got server.js to work
+
+[33mcommit 1e4aa968ba621979ae1a7ca0e05a0d305bef3815[m
+Author: itsHaso <117330115+itsHaso@users.noreply.github.com>
+Date:   Sat May 13 22:04:13 2023 -0400
+
+    got server.js to work
+
+[33mcommit 40b7d376c0a4d3361b4a1146400baf8aa7368018[m
+Merge: 12e7624 5155d39
+Author: jjsmith32199 <113246711+jjsmith32199@users.noreply.github.com>
+Date:   Sat May 13 22:01:52 2023 -0400
+
+    Merge pull request #46 from jjsmith32199/hasan_additions
+    
+    added importData.js and testServer changes
+
+[33mcommit 5155d392c265d1a04835a78ac7788027ad851652[m
+Author: itsHaso <117330115+itsHaso@users.noreply.github.com>
+Date:   Sat May 13 22:00:58 2023 -0400
+
+    added importData.js and testServer changes
+    
+    added importData.js to import user data to mongodb added the server.js code to testserver testserver runs properly in playground but server.js does not shows a white page on graphql link click
+
+[33mcommit 12e7624a04817df61e5ec6c5bba2c9b479b210f2[m
+Merge: a9d92e9 80644bd
+Author: jjsmith32199 <113246711+jjsmith32199@users.noreply.github.com>
+Date:   Sat May 13 14:23:25 2023 -0400
+
+    Merge pull request #45 from jjsmith32199/client-side
+    
+    removed apolloclient.js, app.js files
+
+[33mcommit 80644bd69e21c1246a422b91716ad8c195da82df[m
+Author: Austin Stancil <117120566+AustinS86@users.noreply.github.com>
+Date:   Sat May 13 14:20:06 2023 -0400
+
+    removed apolloclient.js, app.js files
+
+[33mcommit a9d92e939b13ba3256bd290b6f160b95757d389f[m
+Merge: a12927d 7c73c48
+Author: Austin Stancil <117120566+AustinS86@users.noreply.github.com>
+Date:   Sat May 13 12:05:13 2023 -0400
+
+    Merge pull request #44 from jjsmith32199/readme
+    
+    updated read.me
+
+[33mcommit 7c73c48fa7024b9da92f8a99684574f64a600b71[m[33m ([m[1;31morigin/readme[m[33m)[m
+Author: Justin Smith <jj.smith32199@gmail.com>
+Date:   Sat May 13 11:54:45 2023 -0400
+
+    updated read.me
+
+[33mcommit a12927dbb81acc6bc26cd2c83b6a7edd404a223f[m
+Merge: 7035a46 3afb817
+Author: itsHaso <117330115+itsHaso@users.noreply.github.com>
+Date:   Fri May 12 22:16:03 2023 -0400
+
+    Merge pull request #43 from jjsmith32199/client-side
+    
+    updated the server, auth.js files
+
+[33mcommit 3afb817b5a01e2b0d2eec18c0dcaad3d1f9884ba[m
+Author: Austin Stancil <117120566+AustinS86@users.noreply.github.com>
+Date:   Fri May 12 19:35:47 2023 -0400
+
+    updated the server, auth.js files
+
+[33mcommit 7035a4625e5e88191dc01232c71debe6197d7b88[m
+Merge: 5d42b4e e299352
+Author: Austin Stancil <117120566+AustinS86@users.noreply.github.com>
+Date:   Fri May 12 17:23:27 2023 -0400
+
+    Merge pull request #41 from jjsmith32199/readme
+    
+    Update README.md
+
+[33mcommit 5d42b4e3ab539edb45d4c9625f8bcd8756dd6e95[m
+Merge: a0b0c6b ef7bbb4
+Author: Austin Stancil <117120566+AustinS86@users.noreply.github.com>
+Date:   Fri May 12 17:22:51 2023 -0400
+
+    Merge pull request #42 from jjsmith32199/hasan_additions
+    
+    schema changes
+
+[33mcommit ef7bbb40fa22ea0c5fa0aeaab5bbe095d3caa884[m
+Author: itsHaso <117330115+itsHaso@users.noreply.github.com>
+Date:   Fri May 12 04:24:05 2023 -0400
+
+    schema changes
+    
+    added a testServer.js file since i couldnt get app.js to properly connect after running node.js the testServer does let me query the mongodb and get the artist data added a index.js file to merge typedefs changes some pathing all i added in app.js was a test route that didnt work since i couldnt connect to the server at all added resolver query and mution in the schema index and some connections
+
+[33mcommit e2993523e1f66963966e891499d0a1a06ff2b310[m
+Author: Olivia Scalenghe <42279508+oscalenghe@users.noreply.github.com>
+Date:   Thu May 11 22:12:08 2023 -0400
+
+    Update README.md
+
+[33mcommit a0b0c6bdeb6d39de4d1f30c8fb379a5b347a5122[m
+Merge: fee7fab 14cd2c8
+Author: Austin Stancil <117120566+AustinS86@users.noreply.github.com>
+Date:   Thu May 11 22:01:34 2023 -0400
+
+    Merge pull request #40 from jjsmith32199/client-side
+    
+    fixed button
+
+[33mcommit 14cd2c8b33304fd59bea88f298e5431c32b2aee0[m
+Merge: a79dc74 571f335
+Author: Austin Stancil <117120566+AustinS86@users.noreply.github.com>
+Date:   Thu May 11 22:01:04 2023 -0400
+
+    Merge branch 'client-side' of https://github.com/jjsmith32199/Bandwagon into client-side
+
+[33mcommit a79dc7477b73605bd83071d12572c11587a9fb01[m
+Author: Austin Stancil <117120566+AustinS86@users.noreply.github.com>
+Date:   Thu May 11 22:00:57 2023 -0400
+
+    updated client side folders
+
+[33mcommit 571f335c0ae590f939c5598f17796791959f7eda[m
+Author: oscalenghe <42279508+oscalenghe@users.noreply.github.com>
+Date:   Thu May 11 21:53:39 2023 -0400
+
+    fix
+
+[33mcommit 0ebee489d7a820d2331f192ebe61faac0395b6ba[m
+Author: oscalenghe <42279508+oscalenghe@users.noreply.github.com>
+Date:   Thu May 11 21:51:21 2023 -0400
+
+    client-side
+
+[33mcommit fee7fabbb54a98d741a098c3f92429f6af52e722[m
+Merge: bd0e9d7 239a10e
+Author: Olivia Scalenghe <42279508+oscalenghe@users.noreply.github.com>
+Date:   Thu May 11 21:48:34 2023 -0400
+
+    Merge pull request #39 from jjsmith32199/filestruc
+    
+    removed models that were not needed
+
+[33mcommit 239a10e893caa99202474ae297e68d1ec7f31a1e[m[33m ([m[1;31morigin/filestruc[m[33m)[m
+Author: jjsmith32199 <113246711+jjsmith32199@users.noreply.github.com>
+Date:   Thu May 11 21:47:16 2023 -0400
+
+    removed models that were not needed"
+
+[33mcommit e319bf64cd50601b8ae9d49437bfb511fe9f9908[m
+Merge: f94a845 bd0e9d7
+Author: oscalenghe <42279508+oscalenghe@users.noreply.github.com>
+Date:   Thu May 11 21:41:57 2023 -0400
+
+    Merge branch 'main' of github.com:jjsmith32199/Bandwagon into client-side
+
+[33mcommit f94a8454c0e438bf46e230bd0a665938e4e940b4[m
+Author: oscalenghe <42279508+oscalenghe@users.noreply.github.com>
+Date:   Thu May 11 21:40:08 2023 -0400
+
+    typo
+
+[33mcommit bd0e9d7b68f1ab19ac4e2b1ce805592f397f78c3[m
+Merge: 87ba948 48cb52f
+Author: Olivia Scalenghe <42279508+oscalenghe@users.noreply.github.com>
+Date:   Thu May 11 21:39:27 2023 -0400
+
+    Merge pull request #38 from jjsmith32199/lemmecommitbro
+    
+    fixed mongoose
+
+[33mcommit 48cb52fee30a971aaf16c8bba0d5246e362c5ead[m[33m ([m[1;31morigin/lemmecommitbro[m[33m)[m
+Author: jjsmith32199 <113246711+jjsmith32199@users.noreply.github.com>
+Date:   Thu May 11 21:39:26 2023 -0400
+
+    fixed mongoose
+
+[33mcommit 87ba948cdacb5472baac01e905d82ef30fdac2ac[m
+Merge: d2ac1df 9b4ee18
+Author: jjsmith32199 <113246711+jjsmith32199@users.noreply.github.com>
+Date:   Thu May 11 20:47:34 2023 -0400
+
+    Merge pull request #37 from jjsmith32199/client-side
+    
+    Client side
+
+[33mcommit 9b4ee189c1d73e17c4d66ddfc7c844dc6ecb4b04[m
+Author: oscalenghe <42279508+oscalenghe@users.noreply.github.com>
+Date:   Thu May 11 20:42:56 2023 -0400
+
+    styling stuff
+
+[33mcommit 7800faa0f60a726a9b114fa26f0d300eb1d1d703[m
+Merge: 1e1485f d2ac1df
+Author: oscalenghe <42279508+oscalenghe@users.noreply.github.com>
+Date:   Thu May 11 20:07:44 2023 -0400
+
+    Merge branch 'main' of github.com:jjsmith32199/Bandwagon into client-side
+
+[33mcommit d2ac1dfa7d17759c79fb6675fa20b154c4aefb40[m
+Merge: b5ad3e4 2df0afc
+Author: jjsmith32199 <113246711+jjsmith32199@users.noreply.github.com>
+Date:   Thu May 11 20:07:14 2023 -0400
+
+    Merge pull request #36 from jjsmith32199/client-side
+    
+    Client side
+
+[33mcommit 2df0afc63c49ed8455384bc25dffecfad431e30f[m
+Merge: e24b4fa b5ad3e4
+Author: Olivia Scalenghe <42279508+oscalenghe@users.noreply.github.com>
+Date:   Thu May 11 20:06:58 2023 -0400
+
+    Merge branch 'main' into client-side
+
+[33mcommit e24b4faa1d59ec830e2f3cd612946b59f0755000[m
+Merge: 09a5597 5ee4efe
+Author: Austin Stancil <117120566+AustinS86@users.noreply.github.com>
+Date:   Thu May 11 20:05:16 2023 -0400
+
+    Merge branch 'client-side' of https://github.com/jjsmith32199/Bandwagon into client-side
+
+[33mcommit 09a5597d6294a1f3b43e6d667388f312a6d37ae5[m
+Author: Austin Stancil <117120566+AustinS86@users.noreply.github.com>
+Date:   Thu May 11 20:05:06 2023 -0400
+
+    updated utils folder
+
+[33mcommit b5ad3e41c1e2d6e45f42e06c08c08267d251fef2[m
+Merge: 7599ad3 5ee4efe
+Author: itsHaso <117330115+itsHaso@users.noreply.github.com>
+Date:   Thu May 11 20:03:37 2023 -0400
+
+    Merge pull request #35 from jjsmith32199/client-side
+    
+    moved saveditinerary file
+
+[33mcommit 1e1485f24210d0d1f174fd9129b21b30aa0d2855[m
+Merge: 5ee4efe 7599ad3
+Author: oscalenghe <42279508+oscalenghe@users.noreply.github.com>
+Date:   Thu May 11 20:02:19 2023 -0400
+
+    Merge branch 'main' of github.com:jjsmith32199/Bandwagon into client-side
