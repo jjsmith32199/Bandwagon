@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import {
   ApolloClient,
@@ -14,24 +14,30 @@ import SignUpForm from "./components/signUpForm";
 import CreateItinerary from "./pages/CreateItinerary";
 import SavedItinerary from "./pages/savedItinerary";
 import UserProfile from "./components/UserProfile";
-import { useNavigate } from "react-router-dom";
 import Navbar from "./components/navbar";
 import Footer from "./components/Footer";
 
 function App() {
-  const [isLoggedIn, setIsLogged] = useState(false); // set to false for testing
   return (
     <BrowserRouter>
-      <RoutesApp isLoggedIn={isLoggedIn} setIsLogged={setIsLogged} />
+      <RoutesApp />
     </BrowserRouter>
   );
 }
 
-function RoutesApp({ isLoggedIn, setIsLogged }) {
-  // const [isLoggedIn, setIsLogged] = useState(false); // set to false for testing
+function ProtectedRoute({ element, ...rest }) {
+  const token = localStorage.getItem("auth-token");
+  return (
+    <Route
+      {...rest}
+      element={token ? element : <Navigate to="/loginForm" replace />}
+    />
+  );
+}
+
+function RoutesApp() {
   const [savedItineraries, setSavedItineraries] = useState([]);
   const navigate = useNavigate();
-  const isMountedRef = useRef(false);
 
   const authLink = setContext((_, { headers }) => {
     const token = localStorage.getItem("auth-token");
@@ -52,79 +58,30 @@ function RoutesApp({ isLoggedIn, setIsLogged }) {
     cache: new InMemoryCache(),
   });
 
-  const handleLogin = () => {
-    if (isMountedRef.current) {
-      setIsLogged(true);
-      navigate("/userProfile");
-    }
-  };
-
-  const handleSignUp = () => {
-    if (isMountedRef.current) {
-      setIsLogged(true);
-      navigate("/userProfile");
-    }
-  };
-
   const handleLogout = useCallback(() => {
-    if (isMountedRef.current) {
-      setIsLogged(false);
-      localStorage.removeItem("auth-token");
-      navigate("/");
-    }
-  }, [setIsLogged, navigate]);
-
-  const renderCreateItinerary = () => {
-    return isLoggedIn ? (
-      <CreateItinerary
-        savedItineraries={savedItineraries}
-        setSavedItineraries={setSavedItineraries}
-      />
-    ) : (
-      <Navigate to="/loginForm" />
-    );
-  };
-
-  useEffect(() => {
-    isMountedRef.current = true;
-
-    const token = localStorage.getItem("auth-token");
-    if (token) {
-      setIsLogged(true);
-    } else {
-      setIsLogged(false);
-      navigate("/");
-    }
-
-    return () => {
-      isMountedRef.current = false;
-      // Cleanup tasks (cancel subscriptions, clear timeouts/intervals, etc.)
-    };
-  }, [handleLogout, navigate, setIsLogged]);
+    localStorage.removeItem("auth-token");
+    navigate("/");
+  }, [navigate]);
 
   return (
     <ApolloProvider client={client}>
       <div className="App">
-        <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+        <Navbar handleLogout={handleLogout} />
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route
-            path="/loginForm"
+          <Route path="/loginForm" element={<LoginForm />} />
+          <Route path="/signUpForm" element={<SignUpForm />} />
+          <ProtectedRoute
+            path="/createItinerary"
             element={
-              <LoginForm
-                handleLogin={handleLogin}
-                setIsLogged={setIsLogged}
-                navigate={navigate}
+              <CreateItinerary
+                savedItineraries={savedItineraries}
+                setSavedItineraries={setSavedItineraries}
               />
             }
           />
-          <Route
-            path="/signUpForm"
-            element={<SignUpForm handleSignUp={handleSignUp} />}
-          />
-          <Route path="/createItinerary" element={renderCreateItinerary()} />
-          <Route path="/UserProfile" element={<UserProfile />} />
-          <Route
+          <ProtectedRoute path="/UserProfile" element={<UserProfile />} />
+          <ProtectedRoute
             path="/savedItinerary"
             element={<SavedItinerary savedItineraries={savedItineraries} />}
           />

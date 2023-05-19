@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../utils/mutations";
 import {
@@ -10,8 +11,9 @@ import {
   Typography,
 } from "@mui/material";
 
-const LoginForm = ({ setIsLogged, navigate }) => {
+const LoginForm = () => {
   const [loginUser] = useMutation(LOGIN_USER);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -31,15 +33,12 @@ const LoginForm = ({ setIsLogged, navigate }) => {
         },
       });
 
-      if (data && data.login) {
-        const { token } = data.login;
-        localStorage.setItem("auth-token", token);
-        setIsLogged(true);
-        navigate("/userProfile");
+      if (data.login.token) {
+        localStorage.setItem("auth-token", data.login.token);
+        navigate("/UserProfile"); // replace with the appropriate path
       }
-    } catch (error) {
-      console.error(error);
-      // Handle error logging in
+    } catch (e) {
+      console.error(e);
     }
   };
 

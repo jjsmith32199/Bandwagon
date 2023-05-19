@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
 import {
@@ -10,13 +11,29 @@ import {
   Typography,
 } from "@mui/material";
 
-const headers = {
-  "Content-Type": "application/json",
-};
+const SignUpForm = () => {
+  const [addUser] = useMutation(ADD_USER);
+  const navigate = useNavigate();
 
-const SignupForm = ({ handleSignUp }) => {
-  const [signup] = useMutation(ADD_USER, { context: { headers } });
+  const handleSignUp = async (firstName, lastName, email, password) => {
+    try {
+      const { data } = await addUser({
+        variables: {
+          firstName,
+          lastName,
+          email,
+          password,
+        },
+      });
 
+      if (data.addUser.token) {
+        localStorage.setItem("auth-token", data.addUser.token);
+        navigate("/UserProfile"); // replace with the appropriate path
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -26,27 +43,9 @@ const SignupForm = ({ handleSignUp }) => {
     const password = formData.get("password");
 
     // Combine first name and last name into a single username
-    // const username = `${firstName} ${lastName}`;
+    //const username = `${firstName} ${lastName}`;
 
-    try {
-      const { data } = await signup({
-        variables: {
-          firstName,
-          lastName,
-          email,
-          password,
-        },
-      });
-
-      const token = data.signup.token;
-      // Save the token to local storage
-      localStorage.setItem("token", token);
-
-      handleSignUp();
-    } catch (error) {
-      console.error(error);
-      // Display error message to the user
-    }
+    handleSignUp(firstName, lastName, email, password);
   };
 
   return (
@@ -136,5 +135,4 @@ const SignupForm = ({ handleSignUp }) => {
     </Container>
   );
 };
-
-export default SignupForm;
+export default SignUpForm;
