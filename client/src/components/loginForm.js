@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../utils/mutations";
+import { useAuth } from "../utils/AuthContext";
 import {
   Box,
   Button,
@@ -14,6 +15,7 @@ import {
 const LoginForm = () => {
   const [loginUser] = useMutation(LOGIN_USER);
   const navigate = useNavigate();
+  const auth = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -34,8 +36,8 @@ const LoginForm = () => {
       });
 
       if (data.login.token) {
-        localStorage.setItem("auth-token", data.login.token);
-        navigate("/UserProfile"); // replace with the appropriate path
+        auth.login(data.login.token); // Set the token to localStorage
+        navigate("/UserProfile"); // Redirect to the home page
       }
     } catch (e) {
       console.error(e);

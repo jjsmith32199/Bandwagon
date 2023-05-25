@@ -8,17 +8,15 @@ import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../utils/AuthContext";
 
 // import profileImageURL from ""; replace src on line 51 with {{profileImageURL}}
 
-export default function ButtonAppBar({ loggedIn, handleLogout }) {
-  // const [loggedIn, setLoggedIn] = React.useState(false);
+export default function ButtonAppBar() {
+  const { loggedIn, logout } = useAuth();
+  const navigate = useNavigate(); // Used to redirect the user
   const [anchorEl, setAnchorEl] = React.useState(null);
-
-  // const handleLogout = () => {
-  //   setLoggedIn(false);
-  // };
 
   const handleProfileClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -26,6 +24,11 @@ export default function ButtonAppBar({ loggedIn, handleLogout }) {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate("/"); // Redirect to the home page
   };
 
   return (
@@ -41,7 +44,7 @@ export default function ButtonAppBar({ loggedIn, handleLogout }) {
               Bandwagon
             </Link>
           </Typography>
-          {loggedIn ? (
+          {loggedIn() ? (
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <Avatar
                 sx={{
@@ -60,7 +63,14 @@ export default function ButtonAppBar({ loggedIn, handleLogout }) {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>View Profile</MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleClose();
+                    navigate("/UserProfile");
+                  }}
+                >
+                  View Profile
+                </MenuItem>
                 <MenuItem onClick={handleLogout}>Logout</MenuItem>
               </Menu>
             </Box>

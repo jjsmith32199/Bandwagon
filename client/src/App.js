@@ -1,5 +1,10 @@
-import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import React, { useState, useCallback } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import {
   ApolloClient,
   ApolloProvider,
@@ -16,31 +21,26 @@ import SavedItinerary from "./pages/savedItinerary";
 import UserProfile from "./components/UserProfile";
 import Navbar from "./components/navbar";
 import Footer from "./components/Footer";
+import { useNavigate } from "react-router-dom";
+import { AuthProvider, useAuth } from "./utils/AuthContext";
 
 function App() {
   return (
-    <BrowserRouter>
-      <RoutesApp />
-    </BrowserRouter>
-  );
-}
-
-function ProtectedRoute({ element, ...rest }) {
-  const token = localStorage.getItem("auth-token");
-  return (
-    <Route
-      {...rest}
-      element={token ? element : <Navigate to="/loginForm" replace />}
-    />
+    <AuthProvider>
+      <Router>
+        <RoutesApp />
+      </Router>
+    </AuthProvider>
   );
 }
 
 function RoutesApp() {
   const [savedItineraries, setSavedItineraries] = useState([]);
   const navigate = useNavigate();
+  const auth = useAuth();
 
   const authLink = setContext((_, { headers }) => {
-    const token = localStorage.getItem("auth-token");
+    const token = auth.getToken();
     return {
       headers: {
         ...headers,
@@ -50,7 +50,7 @@ function RoutesApp() {
   });
 
   const httpLink = createHttpLink({
-    uri: "http://localhost:3001/graphql",
+    uri: "https://whispering-island-08807.herokuapp.com/graphql",
   });
 
   const client = new ApolloClient({
@@ -59,9 +59,9 @@ function RoutesApp() {
   });
 
   const handleLogout = useCallback(() => {
-    localStorage.removeItem("auth-token");
+    auth.logout();
     navigate("/");
-  }, [navigate]);
+  }, [navigate, auth]);
 
   return (
     <ApolloProvider client={client}>
@@ -71,20 +71,24 @@ function RoutesApp() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/loginForm" element={<LoginForm />} />
           <Route path="/signUpForm" element={<SignUpForm />} />
-          <ProtectedRoute
-            path="/createItinerary"
-            element={
-              <CreateItinerary
-                savedItineraries={savedItineraries}
-                setSavedItineraries={setSavedItineraries}
+          {auth.loggedIn() && (
+            <>
+              <Route
+                path="/createItinerary"
+                element={
+                  <CreateItinerary
+                    savedItineraries={savedItineraries}
+                    setSavedItineraries={setSavedItineraries}
+                  />
+                }
               />
-            }
-          />
-          <ProtectedRoute path="/UserProfile" element={<UserProfile />} />
-          <ProtectedRoute
-            path="/savedItinerary"
-            element={<SavedItinerary savedItineraries={savedItineraries} />}
-          />
+              <Route path="/UserProfile" element={<UserProfile />} />
+              <Route
+                path="/savedItinerary"
+                element={<SavedItinerary savedItineraries={savedItineraries} />}
+              />
+            </>
+          )}
         </Routes>
         <Footer />
       </div>
