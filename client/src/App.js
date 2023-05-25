@@ -50,7 +50,7 @@ function RoutesApp() {
   });
 
   const httpLink = createHttpLink({
-    uri: "https://frozen-meadow-83864.herokuapp.com/graphql",
+    uri: "https://whispering-island-08807.herokuapp.com/graphql",
   });
 
   const client = new ApolloClient({
